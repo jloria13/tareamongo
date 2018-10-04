@@ -17,13 +17,16 @@ import org.bson.Document;
  */
 public class Conector {
     
+    MongoClientURI connectionString;
+    MongoClient mongoClient;
+    MongoDatabase database;
+    MongoCollection<Document> ColPelis,ColComps;
+    
     public Conector (){
-        MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017");
-        MongoClient mongoClient = new MongoClient(connectionString);
-        MongoDatabase database = mongoClient.getDatabase("Cine");
-        MongoCollection<Document> collection = database.getCollection("Peliculas");
-        Document myDoc = collection.find().first();
-        System.out.println(myDoc.toJson());
-        System.out.println(collection.count());
+        connectionString = new MongoClientURI("mongodb://localhost:27017");
+        this.mongoClient = new MongoClient(connectionString);
+        this.database = mongoClient.getDatabase("Cine");
+        ColPelis = database.getCollection("Peliculas");
+        ColComps = database.getCollection("Companias");
     }
 }
