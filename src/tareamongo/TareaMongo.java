@@ -16,6 +16,7 @@ public class TareaMongo {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        new Conector();
     }
     
 }
