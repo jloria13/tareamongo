@@ -29,4 +29,10 @@ public class Conector {
         ColPelis = database.getCollection("Peliculas");
         ColComps = database.getCollection("Companias");
     }
+    
+    public void getPeliculas(){
+        for (Document cur : ColPelis.find()) {
+            System.out.println(cur.toJson());
+        }
+    }
 }
