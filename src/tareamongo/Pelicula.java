@@ -32,8 +32,23 @@ public class Pelicula {
         this.Duracion = Duracion;
         this.Compania_productora = Compania_productora;
         this.Genero = Genero;
-        this.Franquicia = Franquicia;
-        
+        this.Franquicia = Franquicia;  
+    }
+    
+    public void PrintAll (){
+        System.out.println(this.ObjectID);
+        System.out.println(this.Nombre);
+        System.out.println(this.Director);
+        System.out.println(this.Compania_productora);
+        System.out.println(this.Franquicia);
+        for (String Actor:Actores){
+            System.out.println(Actor);
+        }
+        for (String Pais:Paises){
+            System.out.println(Pais);
+        }
+        System.out.println(this.Duracion);
+        System.out.println(this.Fecha);
     }
     
 }

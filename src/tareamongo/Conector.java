@@ -42,6 +42,7 @@ public class Conector {
         String Nombre,Genero,Director,Compania_productora,Franquicia;
         double Fecha,Duracion;
         ArrayList<String> Paises,Actores;
+        Pelicula movie;
         
         for (Document Documento : ColPelis.find(new Document("nombre",nombre))) {
             ObjectID = Documento.getObjectId("_id");
@@ -54,7 +55,9 @@ public class Conector {
             Fecha = Documento.getDouble("fecha");
             Compania_productora = Documento.getString("compania_productora");
             Actores = Documento.get("actores", ArrayList.class);
-            
+            movie = new Pelicula(ObjectID,Nombre,Genero,Director,Compania_productora,
+                    Franquicia,Fecha,Duracion,Paises,Actores);
+            movie.PrintAll();
         }
     }
     
@@ -63,7 +66,8 @@ public class Conector {
         Document Query;
         String Nombre,Genero,Director,Compania_productora,Franquicia;
         double Fecha,Duracion;
-        ArrayList<String> Paises,Actores;        
+        ArrayList<String> Paises,Actores; 
+        Pelicula movie;
         
         for (Document Documento : ColPelis.find(eq ("franquicia",franquicia))) {
             ObjectID = Documento.getObjectId("_id");
@@ -76,6 +80,9 @@ public class Conector {
             Fecha = Documento.getDouble("fecha");
             Compania_productora = Documento.getString("compania_productora");
             Actores = Documento.get("actores", ArrayList.class);
+            movie = new Pelicula(ObjectID, Nombre, Genero, Director, Compania_productora,
+                    Franquicia, Fecha, Duracion, Paises, Actores);
+            movie.PrintAll();
         }
     }
     
@@ -85,6 +92,7 @@ public class Conector {
         String Nombre, Genero, Director, Compania_productora, Franquicia;
         double Fecha, Duracion;
         ArrayList<String> Paises, Actores;
+        Pelicula movie;
 
         for (Document Documento : ColPelis.find(and(gte("fecha",inicio),lte("fecha",fin)))) {
             ObjectID = Documento.getObjectId("_id");
@@ -97,6 +105,9 @@ public class Conector {
             Fecha = Documento.getDouble("fecha");
             Compania_productora = Documento.getString("compania_productora");
             Actores = Documento.get("actores", ArrayList.class);
+            movie = new Pelicula(ObjectID, Nombre, Genero, Director, Compania_productora,
+                    Franquicia, Fecha, Duracion, Paises, Actores);
+            movie.PrintAll();
         }
     }
     
