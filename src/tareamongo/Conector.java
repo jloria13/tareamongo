@@ -41,7 +41,7 @@ public class Conector {
         ObjectId ObjectID;
         String Nombre,Genero,Director,Compania_productora,Franquicia;
         double Fecha,Duracion;
-        ArrayList Paises,Actores;
+        ArrayList<String> Paises,Actores;
         
         for (Document Documento : ColPelis.find(new Document("nombre",nombre))) {
             ObjectID = Documento.getObjectId("_id");
@@ -63,7 +63,7 @@ public class Conector {
         Document Query;
         String Nombre,Genero,Director,Compania_productora,Franquicia;
         double Fecha,Duracion;
-        ArrayList Paises,Actores;        
+        ArrayList<String> Paises,Actores;        
         
         for (Document Documento : ColPelis.find(eq ("franquicia",franquicia))) {
             ObjectID = Documento.getObjectId("_id");
@@ -84,7 +84,7 @@ public class Conector {
         Document Query;
         String Nombre, Genero, Director, Compania_productora, Franquicia;
         double Fecha, Duracion;
-        ArrayList Paises, Actores;
+        ArrayList<String> Paises, Actores;
 
         for (Document Documento : ColPelis.find(and(gte("fecha",inicio),lte("fecha",fin)))) {
             ObjectID = Documento.getObjectId("_id");
