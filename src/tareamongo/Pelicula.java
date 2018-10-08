@@ -16,12 +16,12 @@ public class Pelicula {
     
     ObjectId ObjectID;
     String Nombre, Genero, Director, Compania_productora, Franquicia;
-    double Fecha, Duracion;
+    Double Fecha, Duracion;
     ArrayList<String> Paises, Actores;
     
     public Pelicula (ObjectId ObjectID,String Nombre,String Genero,
             String Director,String Compania_productora,String Franquicia,
-            double Fecha,double Duracion,ArrayList<String> Paises,
+            double Fecha,Double Duracion,ArrayList<String> Paises,
             ArrayList<String> Actores){
         this.ObjectID = ObjectID;
         this.Director = Director;
@@ -34,23 +34,34 @@ public class Pelicula {
         this.Genero = Genero;
         this.Franquicia = Franquicia;  
     }
+
+    Pelicula(String Nombre, String Genero, Double Fecha) {
+        this.Nombre = Nombre;
+        this.Genero = Genero;
+        this.Fecha = Fecha;
+    }
     
     public void PrintAll (){
-        System.out.println("ObjectID: "+this.ObjectID);
-        System.out.println("Nombre: "+this.Nombre);
-        System.out.println("Director: "+this.Director);
-        System.out.println("Companía Productora: "+this.Compania_productora);
-        System.out.println("Franquicia: "+this.Franquicia);
-        System.out.println("Actores: ");
-        for (String Actor:Actores){
-            System.out.println("-"+Actor);
+        if (this.ObjectID != null) System.out.println("ObjectID: "+this.ObjectID);
+        if (this.Nombre != null) System.out.println("Nombre: "+this.Nombre);
+        if (this.Director != null) System.out.println("Director: "+this.Director);
+        if (this.Genero != null) System.out.println("Género: "+this.Genero);
+        if (this.Compania_productora != null) System.out.println("Companía Productora: "+this.Compania_productora);
+        if (this.Franquicia != null) System.out.println("Franquicia: "+this.Franquicia);
+        if (this.Actores != null) {
+            System.out.println("Actores: ");
+            for (String Actor:Actores){
+                System.out.println("-"+Actor);
+            }
         }
-        System.out.println("Países: ");
-        for (String Pais:Paises){
-            System.out.println("-"+Pais);
+        if (this.Paises != null){
+            System.out.println("Países: ");
+            for (String Pais:Paises){
+                System.out.println("-"+Pais);
+            }
         }
-        System.out.println("Duración: "+this.Duracion);
-        System.out.println("Año: "+this.Fecha);
+        if (this.Duracion != null) System.out.println("Duración: "+this.Duracion);
+        if (this.Fecha != null) System.out.println("Año: "+this.Fecha);
     }
     
 }
