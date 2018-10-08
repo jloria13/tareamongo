@@ -36,19 +36,21 @@ public class Pelicula {
     }
     
     public void PrintAll (){
-        System.out.println(this.ObjectID);
-        System.out.println(this.Nombre);
-        System.out.println(this.Director);
-        System.out.println(this.Compania_productora);
-        System.out.println(this.Franquicia);
+        System.out.println("ObjectID: "+this.ObjectID);
+        System.out.println("Nombre: "+this.Nombre);
+        System.out.println("Director: "+this.Director);
+        System.out.println("Companía Productora: "+this.Compania_productora);
+        System.out.println("Franquicia: "+this.Franquicia);
+        System.out.println("Actores: ");
         for (String Actor:Actores){
-            System.out.println(Actor);
+            System.out.println("-"+Actor);
         }
+        System.out.println("Países: ");
         for (String Pais:Paises){
-            System.out.println(Pais);
+            System.out.println("-"+Pais);
         }
-        System.out.println(this.Duracion);
-        System.out.println(this.Fecha);
+        System.out.println("Duración: "+this.Duracion);
+        System.out.println("Año: "+this.Fecha);
     }
     
 }
