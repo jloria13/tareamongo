@@ -21,7 +21,7 @@ public class Pelicula {
     
     public Pelicula (ObjectId ObjectID,String Nombre,String Genero,
             String Director,String Compania_productora,String Franquicia,
-            double Fecha,Double Duracion,ArrayList<String> Paises,
+            Double Fecha,Double Duracion,ArrayList<String> Paises,
             ArrayList<String> Actores){
         this.ObjectID = ObjectID;
         this.Director = Director;
