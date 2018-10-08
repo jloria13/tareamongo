@@ -9,6 +9,9 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Accumulators;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.gte;
@@ -17,6 +20,7 @@ import static com.mongodb.client.model.Projections.excludeId;
 import static com.mongodb.client.model.Projections.fields;
 import static com.mongodb.client.model.Projections.include;
 import java.util.ArrayList;
+import java.util.Arrays;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -139,5 +143,33 @@ public class Conector {
             Peliculas.add(pelicula);
         }
         return Peliculas;
+    }
+    
+    public ArrayList getAggregatesCompania (String Compania_productora){
+        int Cantidad=0;
+        Double Min=0.0,Max=0.0;
+        ArrayList Datos = new ArrayList();
+        for (Document Documento : ColPelis.aggregate(Arrays.asList(
+                Aggregates.match(Filters.eq("compania_productora",Compania_productora)),
+                Aggregates.group(null, Accumulators.sum("cantidad", 1))))){
+            Cantidad = Documento.getInteger("cantidad");
+            System.out.println("Cantidad: "+Cantidad);
+        }
+        Datos.add(Cantidad);
+        for (Document Documento : ColPelis.aggregate(Arrays.asList(
+                Aggregates.match(Filters.eq("compania_productora", Compania_productora)),
+                Aggregates.group(null, Accumulators.max("max", "$duracion"))))) {
+            Max = Documento.getDouble("max");
+            System.out.println("Max: "+Max);
+        }
+        Datos.add(Max);
+        for (Document Documento : ColPelis.aggregate(Arrays.asList(
+                Aggregates.match(Filters.eq("compania_productora", Compania_productora)),
+                Aggregates.group(null, Accumulators.min("min", "$duracion"))))) {
+            Min = Documento.getDouble("min");
+            System.out.println("Min: "+Min);
+        }
+        Datos.add(Min);
+        return Datos;
     }
 }

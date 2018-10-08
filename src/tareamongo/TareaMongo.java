@@ -17,7 +17,7 @@ public class TareaMongo {
     public static void main(String[] args) {
         // TODO code application logic here
         //new Conector().getPeliculaNombre("Venom");
-        new Conector().getCompaniaProductora("Sony Pictures");
+        new Conector().getAggregatesCompania("Sony Pictures");
     }
     
 }
