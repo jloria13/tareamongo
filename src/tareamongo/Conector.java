@@ -24,10 +24,6 @@ import java.util.Arrays;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-/**
- *
- * @author jlori
- */
 public class Conector {
     
     MongoClientURI connectionString;
@@ -128,7 +124,7 @@ public class Conector {
         return Peliculas;
     }
     
-    public ArrayList<Pelicula> getCompaniaProductora (String Compania_productora){
+    public ArrayList<Pelicula> getPeliculaCompania (String Compania_productora){
         String Nombre,Genero;
         Double Fecha;
         Pelicula pelicula;
@@ -171,5 +167,21 @@ public class Conector {
         }
         Datos.add(Min);
         return Datos;
+    }
+    
+    public ArrayList<CompaniaProductora> getCompaniaProductora (String Compania_productora){
+        String Nombre,Web;
+        Double Fundacion;
+        CompaniaProductora Compania;
+        ArrayList<CompaniaProductora> Companias = new ArrayList<>();
+        for (Document Documento : ColComps.find(new Document("nombre",Compania_productora))){
+            Nombre = Documento.getString("nombre");
+            Web = Documento.getString("web");
+            Fundacion = Documento.getDouble("fundacion");
+            Compania = new CompaniaProductora(Fundacion,Nombre,Web);
+            Compania.PrintAll();
+            Companias.add(Compania);
+        }
+        return Companias;
     }
 }

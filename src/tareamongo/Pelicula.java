@@ -8,10 +8,6 @@ package tareamongo;
 import java.util.ArrayList;
 import org.bson.types.ObjectId;
 
-/**
- *
- * @author jlori
- */
 public class Pelicula {
     
     ObjectId ObjectID;
