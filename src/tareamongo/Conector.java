@@ -19,6 +19,8 @@ import static com.mongodb.client.model.Filters.lte;
 import static com.mongodb.client.model.Projections.excludeId;
 import static com.mongodb.client.model.Projections.fields;
 import static com.mongodb.client.model.Projections.include;
+import static com.mongodb.client.model.Updates.combine;
+import static com.mongodb.client.model.Updates.set;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.bson.Document;
@@ -183,5 +185,23 @@ public class Conector {
             Companias.add(Compania);
         }
         return Companias;
+    }
+    
+    public void setPelicula(String Nombre,String Genero,String Director,String Franquicia,
+            ArrayList<String> PaisProdu,Double Duracion,Double Fecha,
+            String CompaniaProductora,ArrayList<String> Actores){
+        ColPelis.updateOne(
+                eq("nombre",Nombre),
+                new Document("$set",new Document("genero",Genero)
+                        .append("director", Director)
+                        .append("franquicia",Franquicia)
+                        .append("duracion", Duracion)
+                        .append("fecha", Fecha)
+                        .append("paises", PaisProdu)
+                        .append("actores", Actores))); 
+    }
+    
+    public void deletePelicula(String Nombre){
+        
     }
 }
