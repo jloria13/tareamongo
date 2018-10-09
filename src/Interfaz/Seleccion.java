@@ -151,12 +151,16 @@ public class Seleccion extends javax.swing.JFrame {
 
     private void ConsultaEspecialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsultaEspecialMouseClicked
         // TODO add your handling code here:
-        this.dispose();
+        ConsultasEspeciales ventana = new ConsultasEspeciales(this);
+        ventana.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_ConsultaEspecialMouseClicked
 
     private void CRUDMovieMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CRUDMovieMouseClicked
         // TODO add your handling code here:
-        this.dispose();
+        CRUDPelicula ventana = new CRUDPelicula(this);
+        ventana.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_CRUDMovieMouseClicked
 
     private void CRUDMovieMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CRUDMovieMouseEntered
@@ -166,7 +170,9 @@ public class Seleccion extends javax.swing.JFrame {
 
     private void CRUDCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CRUDCompanyMouseClicked
         // TODO add your handling code here:
-        this.dispose();
+        CRUDCompaniaProductora ventana = new CRUDCompaniaProductora(this);
+        ventana.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_CRUDCompanyMouseClicked
 
     private void CRUDCompanyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CRUDCompanyMouseEntered
