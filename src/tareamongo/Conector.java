@@ -202,6 +202,16 @@ public class Conector {
     }
     
     public void deletePelicula(String Nombre){
-        
+        ColPelis.deleteOne(eq("nombre",Nombre));
+    }
+    
+    public void setCompaniaProductora (String Nombre,String Web,Double Fundacion){
+        ColComps.updateOne(eq("nombre",Nombre),
+                new Document("$set",new Document("web",Web)
+                        .append("fundacion", Fundacion)));
+    }
+    
+    public void deleteCompaniaProductora (String Nombre){
+        ColComps.deleteOne(eq("nombre",Nombre));
     }
 }
