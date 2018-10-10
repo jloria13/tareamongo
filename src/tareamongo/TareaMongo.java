@@ -5,10 +5,8 @@
  */
 package tareamongo;
 
-/**
- *
- * @author jlori
- */
+import java.util.ArrayList;
+
 public class TareaMongo {
 
     /**
@@ -16,6 +14,9 @@ public class TareaMongo {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        //new Conector().getPeliculaNombre("Venom");
+        Conector conector = new Conector();
+        ArrayList<Pelicula> pelis = conector.getPeliculaNombre("Venom");
     }
     
 }
