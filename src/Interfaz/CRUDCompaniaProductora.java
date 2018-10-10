@@ -24,6 +24,7 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
     Seleccion ventana_anterior;
     Conector Query;
     boolean Crear;
+    ArrayList<CompaniaProductora> Companias;
     
     public CRUDCompaniaProductora() {
         initComponents();
@@ -33,7 +34,6 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         ventana_anterior = ventana;
         initComponents();
         Crear = false;
-        jLabelModficarMensaje.setVisible(false);
         jPanelCreate.setVisible(false);
         jPanelDelete.setVisible(false);
         Query = new Conector();
@@ -43,9 +43,9 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
     public void CrearPelicula(){
         try {
             String Duracion = TextDuracion.getText();
-            String Fecha = TextFecha.getText();
+            String Fecha = TextFundacion.getText();
             Query.insertPelicula(TextNombre.getText(), TextGenero.getText(),
-                    TextDirector.getText(), TextFranquicia.getText(),
+                    TextWeb.getText(), TextFranquicia.getText(),
                     Paises,Double.parseDouble(Duracion), Double.parseDouble(Fecha),
                     TextCompaniaProductora.getText(), Actores);
             JOptionPane.showMessageDialog(this, "Pelicula registrada", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
@@ -55,18 +55,17 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         }
     }
     
-    public void EliminarPelicula (){
+    public void EliminarCompania (){
         try {
-            Query.deletePelicula(TextNombreEliminar.getText());
-            JOptionPane.showMessageDialog(this, "Pelicula eliminada", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
+            Query.deleteCompaniaProductora(TextNombreEliminar.getText());
+            JOptionPane.showMessageDialog(this, "Compañía productora eliminada", "Eliminada", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No se pudo eliminar la película", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar la compañía productora", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     public void VerPelicula(){
         try {
-            ModeloPeliculas.removeAllElements();
             Peliculas = Query.getPeliculas();
             for (Pelicula peli : Peliculas) {
                 ModeloPeliculas.addElement(peli.Nombre);
@@ -79,14 +78,14 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
     public void setPelicula(Pelicula peli){
         this.BorrarView();
         TextNombre.setText(peli.Nombre);
-        TextDirector.setText(peli.Director);
+        TextWeb.setText(peli.Director);
         TextFranquicia.setText(peli.Franquicia);
         TextCompaniaProductora.setText(peli.Compania_productora);
         TextGenero.setText(peli.Genero);
         String duracion = ""+peli.Duracion;
         TextDuracion.setText(duracion.replace(".0", ""));
         String fecha = ""+peli.Fecha;
-        TextFecha.setText(fecha.replace(".0", ""));
+        TextFundacion.setText(fecha.replace(".0", ""));
         Actores = peli.Actores;
         for (String Actor:peli.Actores){
             ModeloActores.addElement(Actor);
@@ -104,9 +103,9 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
     public void ActualizarPelicula(){
         try {
             String Duracion = TextDuracion.getText();
-            String Fecha = TextFecha.getText();
+            String Fecha = TextFundacion.getText();
             Query.setPelicula(TextNombre.getText(), TextGenero.getText(),
-                    TextDirector.getText(), TextFranquicia.getText(),
+                    TextWeb.getText(), TextFranquicia.getText(),
                     Paises, Double.parseDouble(Duracion), Double.parseDouble(Fecha),
                     TextCompaniaProductora.getText(), Actores);
             JOptionPane.showMessageDialog(this, "Pelicula ha sido actualizada", "Actualizada", JOptionPane.INFORMATION_MESSAGE);
@@ -117,17 +116,9 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
     }
     
     public void BorrarView(){
-        ModeloPaises.removeAllElements();
-        ModeloActores.removeAllElements();
-        TextActor.setText("");
-        TextPais.setText("");
         TextNombre.setText("");
-        TextDirector.setText("");
-        TextGenero.setText("");
-        TextFecha.setText("");
-        TextCompaniaProductora.setText("");
-        TextFranquicia.setText("");
-        TextDuracion.setText("");
+        TextWeb.setText("");
+        TextFundacion.setText("");
     }
 
     /**
@@ -148,27 +139,11 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         jLabelCrearMensaje = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jListPaises = new javax.swing.JList<String>(ModeloPaises);
         TextNombre = new javax.swing.JTextField();
-        TextDirector = new javax.swing.JTextField();
-        TextFranquicia = new javax.swing.JTextField();
-        TextGenero = new javax.swing.JTextField();
-        TextFecha = new javax.swing.JTextField();
-        TextActor = new javax.swing.JTextField();
-        TextPais = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jListActores = new javax.swing.JList<String>(ModeloActores);
+        TextWeb = new javax.swing.JTextField();
+        TextFundacion = new javax.swing.JTextField();
         LabelGuardar = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        TextCompaniaProductora = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        TextDuracion = new javax.swing.JTextField();
         jPanelView = new javax.swing.JPanel();
         jLabelCrearMensaje2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -283,67 +258,14 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         jLabel3.setBackground(java.awt.Color.white);
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(java.awt.Color.white);
-        jLabel3.setText("Director:");
-
-        jLabel4.setBackground(java.awt.Color.white);
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(java.awt.Color.white);
-        jLabel4.setText("Franquicia:");
-
-        jLabel5.setBackground(java.awt.Color.white);
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(java.awt.Color.white);
-        jLabel5.setText("Genero:");
-
-        jLabel6.setBackground(java.awt.Color.white);
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel6.setForeground(java.awt.Color.white);
-        jLabel6.setText("Pais de producción:");
-
-        jLabel7.setBackground(java.awt.Color.white);
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setForeground(java.awt.Color.white);
-        jLabel7.setText("Actores:");
-
-        jListPaises.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jListPaises.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListPaisesMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jListPaises);
+        jLabel3.setText("Web:");
 
         TextNombre.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        TextDirector.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        TextWeb.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        TextWeb.setText("http://");
 
-        TextFranquicia.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-
-        TextGenero.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-
-        TextFecha.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-
-        TextActor.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        TextActor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TextActorKeyPressed(evt);
-            }
-        });
-
-        TextPais.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        TextPais.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TextPaisKeyPressed(evt);
-            }
-        });
-
-        jListActores.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jListActores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListActoresMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jListActores);
+        TextFundacion.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         LabelGuardar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         LabelGuardar.setForeground(java.awt.Color.white);
@@ -362,21 +284,7 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         jLabel8.setBackground(java.awt.Color.white);
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(java.awt.Color.white);
-        jLabel8.setText("Fecha:");
-
-        jLabel9.setBackground(java.awt.Color.white);
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel9.setForeground(java.awt.Color.white);
-        jLabel9.setText("Compañía productora:");
-
-        TextCompaniaProductora.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-
-        jLabel10.setBackground(java.awt.Color.white);
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel10.setForeground(java.awt.Color.white);
-        jLabel10.setText("Duración:");
-
-        TextDuracion.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel8.setText("Fundacion:");
 
         javax.swing.GroupLayout jPanelCreateLayout = new javax.swing.GroupLayout(jPanelCreate);
         jPanelCreate.setLayout(jPanelCreateLayout);
@@ -388,107 +296,46 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabelCrearMensaje))
                     .addGroup(jPanelCreateLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(173, 173, 173)
+                        .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanelCreateLayout.createSequentialGroup()
-                                .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCreateLayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(TextNombre))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCreateLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(TextDirector, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelCreateLayout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(TextDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelCreateLayout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(TextFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextFundacion))
                             .addGroup(jPanelCreateLayout.createSequentialGroup()
-                                .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelCreateLayout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TextFranquicia, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(102, 102, 102))
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TextGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TextNombre))
                             .addGroup(jPanelCreateLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TextCompaniaProductora, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelCreateLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TextPais, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TextWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCreateLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCreateLayout.createSequentialGroup()
-                        .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelCreateLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TextActor, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(155, 155, 155))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCreateLayout.createSequentialGroup()
-                        .addComponent(LabelGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(281, 281, 281))))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(LabelGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(276, 276, 276))
         );
         jPanelCreateLayout.setVerticalGroup(
             jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCreateLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelCrearMensaje)
-                .addGap(10, 10, 10)
+                .addGap(133, 133, 133)
                 .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TextNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
-                        .addComponent(TextDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TextDirector, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8)
-                        .addComponent(TextFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(TextWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(TextFranquicia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(TextGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TextCompaniaProductora, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(TextPais, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(TextActor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel8)
+                    .addComponent(TextFundacion, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(LabelGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addContainerGap())
         );
 
         getContentPane().add(jPanelCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
@@ -646,73 +493,15 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         LabelEliminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_LabelEliminarMouseEntered
 
-    private void LabelGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelGuardarMouseClicked
-        // TODO add your handling code here:
-        if (this.Crear){
-            CrearPelicula();
-        }else{
-            ActualizarPelicula();
-        }
-    }//GEN-LAST:event_LabelGuardarMouseClicked
-
-    private void LabelGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelGuardarMouseEntered
-        // TODO add your handling code here:
-        LabelGuardar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_LabelGuardarMouseEntered
-
-    private void TextPaisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextPaisKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if (!Paises.contains(TextPais.getText())){
-                ModeloPaises.addElement(TextPais.getText());
-                Paises.add(TextPais.getText());
-                TextPais.setText("");
-            }else{
-                JOptionPane.showMessageDialog(this, "Ya se encuentra ese país", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_TextPaisKeyPressed
-
-    private void TextActorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextActorKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if (!Actores.contains(TextActor.getText())){
-                ModeloActores.addElement(TextActor.getText());
-                Actores.add(TextActor.getText());
-                TextActor.setText("");
-            }else{
-                JOptionPane.showMessageDialog(this, "Ya se encuentra ese actor", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_TextActorKeyPressed
-
     private void LabelELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelELIMINARMouseClicked
         // TODO add your handling code here:
-        EliminarPelicula();
+        EliminarCompania();
     }//GEN-LAST:event_LabelELIMINARMouseClicked
 
     private void LabelELIMINARMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelELIMINARMouseEntered
         // TODO add your handling code here:
         LabelELIMINAR.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_LabelELIMINARMouseEntered
-
-    private void jListPaisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPaisesMouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2){
-            int valor = jListPaises.getSelectedIndex();
-            ModeloPaises.remove(valor);
-            Paises.remove(valor);
-        }
-    }//GEN-LAST:event_jListPaisesMouseClicked
-
-    private void jListActoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListActoresMouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
-            int valor = jListActores.getSelectedIndex();
-            ModeloActores.remove(valor);
-            Actores.remove(valor);
-        }
-    }//GEN-LAST:event_jListActoresMouseClicked
 
     private void jListPeliculasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPeliculasMouseClicked
         // TODO add your handling code here:
@@ -733,7 +522,6 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         this.VerPelicula();
         jPanelCreate.setVisible(false);
         jLabelCrearMensaje.setVisible(false);  //Mensaje Crear
-        jLabelModficarMensaje.setVisible(true);   //Mensaje Modificar
         jPanelView.setVisible(true);
         jPanelDelete.setVisible(false);
         Crear = false;
@@ -743,6 +531,20 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         // TODO add your handling code here:
         LabelModificar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_LabelModificarMouseEntered
+
+    private void LabelGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelGuardarMouseEntered
+        // TODO add your handling code here:
+        LabelGuardar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelGuardarMouseEntered
+
+    private void LabelGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelGuardarMouseClicked
+        // TODO add your handling code here:
+        if (this.Crear){
+            CrearPelicula();
+        }else{
+            ActualizarPelicula();
+        }
+    }//GEN-LAST:event_LabelGuardarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -787,38 +589,22 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
     private javax.swing.JLabel LabelEliminar;
     private javax.swing.JLabel LabelGuardar;
     private javax.swing.JLabel LabelModificar;
-    private javax.swing.JTextField TextActor;
-    private javax.swing.JTextField TextCompaniaProductora;
-    private javax.swing.JTextField TextDirector;
-    private javax.swing.JTextField TextDuracion;
-    private javax.swing.JTextField TextFecha;
-    private javax.swing.JTextField TextFranquicia;
-    private javax.swing.JTextField TextGenero;
+    private javax.swing.JTextField TextFundacion;
     private javax.swing.JTextField TextNombre;
     private javax.swing.JTextField TextNombreEliminar;
-    private javax.swing.JTextField TextPais;
+    private javax.swing.JTextField TextWeb;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelCrearMensaje;
     private javax.swing.JLabel jLabelCrearMensaje1;
     private javax.swing.JLabel jLabelCrearMensaje2;
-    private javax.swing.JList<String> jListActores;
-    private javax.swing.JList<String> jListPaises;
     private javax.swing.JList<String> jListPeliculas;
     private javax.swing.JPanel jPanelAdmin;
     private javax.swing.JPanel jPanelCreate;
     private javax.swing.JPanel jPanelDelete;
     private javax.swing.JPanel jPanelView;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

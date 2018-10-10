@@ -5,7 +5,7 @@
  */
 package tareamongo;
 
-class CompaniaProductora {
+public class CompaniaProductora {
     
     Double Fundacion;
     String Nombre,Web;

@@ -194,6 +194,22 @@ public class Conector {
         return Datos;
     }
     
+    public ArrayList<CompaniaProductora> getCompaniasProductoras(){
+        String Nombre, Web;
+        Double Fundacion;
+        CompaniaProductora Compania;
+        ArrayList<CompaniaProductora> Companias = new ArrayList<>();
+        for (Document Documento : ColComps.find(new Document())) {
+            Nombre = Documento.getString("nombre");
+            Web = Documento.getString("web");
+            Fundacion = Documento.getDouble("fundacion");
+            Compania = new CompaniaProductora(Fundacion, Nombre, Web);
+            Compania.PrintAll();
+            Companias.add(Compania);
+        }
+        return Companias;
+    }
+    
     public ArrayList<CompaniaProductora> getCompaniaProductora (String Compania_productora){
         String Nombre,Web;
         Double Fundacion;
