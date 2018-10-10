@@ -8,6 +8,8 @@ package Interfaz;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Cursor;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import tareamongo.Conector;
@@ -24,6 +26,7 @@ public class CRUDPelicula extends javax.swing.JFrame {
     Conector Query;
     ArrayList<String> Paises,Actores;
     ArrayList<Pelicula> Peliculas;
+    boolean Crear;
     
     public CRUDPelicula() {
         initComponents();
@@ -35,11 +38,12 @@ public class CRUDPelicula extends javax.swing.JFrame {
         ModeloPeliculas = new DefaultListModel();
         ventana_anterior = ventana;
         initComponents();
+        Crear = false;
+        jLabelModficarMensaje.setVisible(false);
         jPanelCreate.setVisible(false);
         jPanelDelete.setVisible(false);
         Query = new Conector();
-        Peliculas = Query.getPeliculas();
-        VerPelicula();
+        this.VerPelicula();
     }
     
     public void CrearPelicula(){
@@ -51,6 +55,7 @@ public class CRUDPelicula extends javax.swing.JFrame {
                     Paises,Double.parseDouble(Duracion), Double.parseDouble(Fecha),
                     TextCompaniaProductora.getText(), Actores);
             JOptionPane.showMessageDialog(this, "Pelicula registrada", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
+            this.BorrarView();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "No se pudo registrar la película", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -66,9 +71,69 @@ public class CRUDPelicula extends javax.swing.JFrame {
     }
     
     public void VerPelicula(){
-        for (Pelicula peli:Peliculas){
-            ModeloPeliculas.addElement(peli.Nombre);
+        try {
+            ModeloPeliculas.removeAllElements();
+            Peliculas = Query.getPeliculas();
+            for (Pelicula peli : Peliculas) {
+                ModeloPeliculas.addElement(peli.Nombre);
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "No se pudo cargar las películas", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public void setPelicula(Pelicula peli){
+        this.BorrarView();
+        TextNombre.setText(peli.Nombre);
+        TextDirector.setText(peli.Director);
+        TextFranquicia.setText(peli.Franquicia);
+        TextCompaniaProductora.setText(peli.Compania_productora);
+        TextGenero.setText(peli.Genero);
+        String duracion = ""+peli.Duracion;
+        TextDuracion.setText(duracion.replace(".0", ""));
+        String fecha = ""+peli.Fecha;
+        TextFecha.setText(fecha.replace(".0", ""));
+        Actores = peli.Actores;
+        for (String Actor:peli.Actores){
+            ModeloActores.addElement(Actor);
+        }
+        Paises = peli.Paises;
+        for (String Pais:peli.Paises){
+            ModeloPaises.addElement(Pais);
+        }
+        jLabelModficarMensaje.setVisible(false);
+        jLabelCrearMensaje.setVisible(false);
+        jPanelView.setVisible(false);
+        jPanelCreate.setVisible(true);
+    }
+    
+    public void ActualizarPelicula(){
+        try {
+            String Duracion = TextDuracion.getText();
+            String Fecha = TextFecha.getText();
+            Query.setPelicula(TextNombre.getText(), TextGenero.getText(),
+                    TextDirector.getText(), TextFranquicia.getText(),
+                    Paises, Double.parseDouble(Duracion), Double.parseDouble(Fecha),
+                    TextCompaniaProductora.getText(), Actores);
+            JOptionPane.showMessageDialog(this, "Pelicula ha sido actualizada", "Actualizada", JOptionPane.INFORMATION_MESSAGE);
+            this.BorrarView();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se pudo actualizar la película", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void BorrarView(){
+        ModeloPaises.removeAllElements();
+        ModeloActores.removeAllElements();
+        TextActor.setText("");
+        TextPais.setText("");
+        TextNombre.setText("");
+        TextDirector.setText("");
+        TextGenero.setText("");
+        TextFecha.setText("");
+        TextCompaniaProductora.setText("");
+        TextFranquicia.setText("");
+        TextDuracion.setText("");
     }
 
     /**
@@ -84,6 +149,7 @@ public class CRUDPelicula extends javax.swing.JFrame {
         LabelCrear = new javax.swing.JLabel();
         Back = new javax.swing.JLabel();
         LabelEliminar = new javax.swing.JLabel();
+        LabelModificar = new javax.swing.JLabel();
         jPanelCreate = new javax.swing.JPanel();
         jLabelCrearMensaje = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -109,6 +175,7 @@ public class CRUDPelicula extends javax.swing.JFrame {
         TextCompaniaProductora = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         TextDuracion = new javax.swing.JTextField();
+        jLabelModficarMensaje = new javax.swing.JLabel();
         jPanelView = new javax.swing.JPanel();
         jLabelCrearMensaje2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -160,6 +227,19 @@ public class CRUDPelicula extends javax.swing.JFrame {
             }
         });
 
+        LabelModificar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelModificar.setForeground(new java.awt.Color(0, 153, 153));
+        LabelModificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelModificar.setText("MODIFICAR");
+        LabelModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelModificarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelModificarMouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAdminLayout = new javax.swing.GroupLayout(jPanelAdmin);
         jPanelAdmin.setLayout(jPanelAdminLayout);
         jPanelAdminLayout.setHorizontalGroup(
@@ -174,7 +254,10 @@ public class CRUDPelicula extends javax.swing.JFrame {
                         .addComponent(LabelCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelAdminLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(LabelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LabelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelAdminLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(LabelModificar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelAdminLayout.setVerticalGroup(
@@ -182,11 +265,13 @@ public class CRUDPelicula extends javax.swing.JFrame {
             .addGroup(jPanelAdminLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Back)
-                .addGap(105, 105, 105)
+                .addGap(79, 79, 79)
                 .addComponent(LabelCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112)
+                .addGap(82, 82, 82)
+                .addComponent(LabelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(LabelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addGap(83, 83, 83))
         );
 
         getContentPane().add(jPanelAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 540));
@@ -300,6 +385,10 @@ public class CRUDPelicula extends javax.swing.JFrame {
 
         TextDuracion.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
+        jLabelModficarMensaje.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabelModficarMensaje.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelModficarMensaje.setText("Modificar una película");
+
         javax.swing.GroupLayout jPanelCreateLayout = new javax.swing.GroupLayout(jPanelCreate);
         jPanelCreate.setLayout(jPanelCreateLayout);
         jPanelCreateLayout.setHorizontalGroup(
@@ -366,6 +455,11 @@ public class CRUDPelicula extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCreateLayout.createSequentialGroup()
                         .addComponent(LabelGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(281, 281, 281))))
+            .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelCreateLayout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(jLabelModficarMensaje)
+                    .addContainerGap(286, Short.MAX_VALUE)))
         );
         jPanelCreateLayout.setVerticalGroup(
             jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,6 +505,11 @@ public class CRUDPelicula extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LabelGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
+            .addGroup(jPanelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelCreateLayout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addComponent(jLabelModficarMensaje)
+                    .addContainerGap(471, Short.MAX_VALUE)))
         );
 
         getContentPane().add(jPanelCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
@@ -539,9 +638,13 @@ public class CRUDPelicula extends javax.swing.JFrame {
 
     private void LabelCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCrearMouseClicked
         // TODO add your handling code here:
+        this.BorrarView();
         jPanelCreate.setVisible(true);
+        jLabelCrearMensaje.setVisible(true);  //Mensaje Crear
+        jLabelModficarMensaje.setVisible(false);   //Mensaje Modificar
         jPanelDelete.setVisible(false);
         jPanelView.setVisible(false);
+        Crear = true;
         Paises = new ArrayList<>();
         Actores = new ArrayList<>();
     }//GEN-LAST:event_LabelCrearMouseClicked
@@ -556,6 +659,7 @@ public class CRUDPelicula extends javax.swing.JFrame {
         jPanelCreate.setVisible(false);
         jPanelDelete.setVisible(true);
         jPanelView.setVisible(false);
+        Crear = false;
     }//GEN-LAST:event_LabelEliminarMouseClicked
 
     private void LabelEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelEliminarMouseEntered
@@ -565,12 +669,16 @@ public class CRUDPelicula extends javax.swing.JFrame {
 
     private void LabelGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelGuardarMouseClicked
         // TODO add your handling code here:
-        CrearPelicula();
+        if (this.Crear){
+            CrearPelicula();
+        }else{
+            ActualizarPelicula();
+        }
     }//GEN-LAST:event_LabelGuardarMouseClicked
 
     private void LabelGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelGuardarMouseEntered
         // TODO add your handling code here:
-        LabelEliminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        LabelGuardar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_LabelGuardarMouseEntered
 
     private void TextPaisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextPaisKeyPressed
@@ -579,6 +687,7 @@ public class CRUDPelicula extends javax.swing.JFrame {
             if (!Paises.contains(TextPais.getText())){
                 ModeloPaises.addElement(TextPais.getText());
                 Paises.add(TextPais.getText());
+                TextPais.setText("");
             }else{
                 JOptionPane.showMessageDialog(this, "Ya se encuentra ese país", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -591,6 +700,7 @@ public class CRUDPelicula extends javax.swing.JFrame {
             if (!Actores.contains(TextActor.getText())){
                 ModeloActores.addElement(TextActor.getText());
                 Actores.add(TextActor.getText());
+                TextActor.setText("");
             }else{
                 JOptionPane.showMessageDialog(this, "Ya se encuentra ese actor", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -629,10 +739,31 @@ public class CRUDPelicula extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2){
             int valor = jListPeliculas.getSelectedIndex();
-            Pelicula peli = Peliculas.get(valor);
-            peli.PrintAll();
+            try {
+                Pelicula peli = Peliculas.get(valor);
+                setPelicula(peli);
+            } catch (Exception e) {
+                Logger.getLogger(CRUDPelicula.class.getName()).log(Level.INFO, "message"+e);
+                JOptionPane.showMessageDialog(this, "Se produjo un error", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jListPeliculasMouseClicked
+
+    private void LabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelModificarMouseClicked
+        // TODO add your handling code here:
+        this.VerPelicula();
+        jPanelCreate.setVisible(false);
+        jLabelCrearMensaje.setVisible(false);  //Mensaje Crear
+        jLabelModficarMensaje.setVisible(true);   //Mensaje Modificar
+        jPanelView.setVisible(true);
+        jPanelDelete.setVisible(false);
+        Crear = false;
+    }//GEN-LAST:event_LabelModificarMouseClicked
+
+    private void LabelModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelModificarMouseEntered
+        // TODO add your handling code here:
+        LabelModificar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelModificarMouseEntered
 
     /**
      * @param args the command line arguments
@@ -675,6 +806,7 @@ public class CRUDPelicula extends javax.swing.JFrame {
     private javax.swing.JLabel LabelELIMINAR;
     private javax.swing.JLabel LabelEliminar;
     private javax.swing.JLabel LabelGuardar;
+    private javax.swing.JLabel LabelModificar;
     private javax.swing.JTextField TextActor;
     private javax.swing.JTextField TextCompaniaProductora;
     private javax.swing.JTextField TextDirector;
@@ -698,6 +830,7 @@ public class CRUDPelicula extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCrearMensaje;
     private javax.swing.JLabel jLabelCrearMensaje1;
     private javax.swing.JLabel jLabelCrearMensaje2;
+    private javax.swing.JLabel jLabelModficarMensaje;
     private javax.swing.JList<String> jListActores;
     private javax.swing.JList<String> jListPaises;
     private javax.swing.JList<String> jListPeliculas;
