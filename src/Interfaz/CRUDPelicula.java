@@ -743,7 +743,7 @@ public class CRUDPelicula extends javax.swing.JFrame {
                 Pelicula peli = Peliculas.get(valor);
                 setPelicula(peli);
             } catch (Exception e) {
-                Logger.getLogger(CRUDPelicula.class.getName()).log(Level.INFO, "message"+e);
+                Logger.getLogger(CRUDPelicula.class.getName()).log(Level.INFO, "message "+e);
                 JOptionPane.showMessageDialog(this, "Se produjo un error", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }

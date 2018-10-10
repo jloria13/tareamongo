@@ -25,6 +25,7 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
     DefaultListModel ModeloPaises,ModeloActores,ModeloPeliculas;
     ArrayList<Pelicula> Peliculas;
     ArrayList<String> Actores,Paises;
+    ArrayList Datos;
     
     public ConsultasEspeciales() {
         initComponents();
@@ -80,6 +81,37 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
                 break;
         }
     }
+    
+    void Borrar(){
+        TextPeliculaNombre.setText("");
+        TextPeliculaDirector.setText("");
+        TextPeliculaFranquicia.setText("");
+        TextPeliculaGenero.setText("");
+        TextPeliculaFecha.setText("");
+        TextPeliculaDuracion.setText("");
+        ModeloActores.removeAllElements();
+        ModeloPaises.removeAllElements();
+    }
+    
+    void CargarPelicula(){
+        this.Borrar();
+        int valor = jListPeliculas.getSelectedIndex();
+        Pelicula pelicula = Peliculas.get(valor);
+        TextPeliculaNombre.setText(pelicula.Nombre);
+        TextPeliculaDirector.setText(pelicula.Director);
+        TextPeliculaFranquicia.setText(pelicula.Franquicia);
+        TextPeliculaGenero.setText(pelicula.Genero);
+        String Fecha = ""+pelicula.Fecha;
+        TextPeliculaFecha.setText(Fecha.replace(".0", ""));
+        String Duracion = "" + pelicula.Duracion;
+        TextPeliculaDuracion.setText(Duracion.replace(".0", ""));
+        for (String Actor:pelicula.Actores){
+            ModeloActores.addElement(Actor);
+        }
+        for (String Pais:pelicula.Paises){
+            ModeloPaises.addElement(Pais);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,6 +140,18 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jListPeliculas = new javax.swing.JList<String>(ModeloPeliculas);
         jPanelConsulta5 = new javax.swing.JPanel();
+        LabelCantidad = new javax.swing.JLabel();
+        TextPeliculaNombre1 = new javax.swing.JLabel();
+        TextConsulta5 = new javax.swing.JTextField();
+        jLabelConsulta1_5 = new javax.swing.JLabel();
+        LabelConsultar5 = new javax.swing.JLabel();
+        jLabelConsultarMensaje1 = new javax.swing.JLabel();
+        TextPeliculaNombre2 = new javax.swing.JLabel();
+        LabelMayorDuracion = new javax.swing.JLabel();
+        TextPeliculaNombre3 = new javax.swing.JLabel();
+        LabelPromedio = new javax.swing.JLabel();
+        LabelMenorDuracion = new javax.swing.JLabel();
+        TextPeliculaNombre4 = new javax.swing.JLabel();
         jPanelDatos = new javax.swing.JPanel();
         TextPeliculaNombre = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -286,7 +330,7 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
 
         TextConsulta1_5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        jListPeliculas.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jListPeliculas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jListPeliculas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jListPeliculasMouseClicked(evt);
@@ -347,15 +391,144 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
 
         jPanelConsulta5.setBackground(new java.awt.Color(0, 153, 153));
 
+        LabelCantidad.setBackground(java.awt.Color.white);
+        LabelCantidad.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelCantidad.setForeground(java.awt.Color.white);
+        LabelCantidad.setText("-----------");
+
+        TextPeliculaNombre1.setBackground(java.awt.Color.white);
+        TextPeliculaNombre1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TextPeliculaNombre1.setForeground(java.awt.Color.white);
+        TextPeliculaNombre1.setText(" Cantidad de películas: ");
+
+        TextConsulta5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        jLabelConsulta1_5.setBackground(java.awt.Color.white);
+        jLabelConsulta1_5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelConsulta1_5.setForeground(java.awt.Color.white);
+        jLabelConsulta1_5.setText("Nombre:");
+
+        LabelConsultar5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelConsultar5.setForeground(java.awt.Color.white);
+        LabelConsultar5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelConsultar5.setText("CONSULTAR");
+        LabelConsultar5.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.white, 2));
+        LabelConsultar5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelConsultar5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelConsultar5MouseEntered(evt);
+            }
+        });
+
+        jLabelConsultarMensaje1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabelConsultarMensaje1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelConsultarMensaje1.setText("Consultar promedios por Compañía");
+
+        TextPeliculaNombre2.setBackground(java.awt.Color.white);
+        TextPeliculaNombre2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TextPeliculaNombre2.setForeground(java.awt.Color.white);
+        TextPeliculaNombre2.setText("Película de mayor duración:");
+
+        LabelMayorDuracion.setBackground(java.awt.Color.white);
+        LabelMayorDuracion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelMayorDuracion.setForeground(java.awt.Color.white);
+        LabelMayorDuracion.setText("------------");
+
+        TextPeliculaNombre3.setBackground(java.awt.Color.white);
+        TextPeliculaNombre3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TextPeliculaNombre3.setForeground(java.awt.Color.white);
+        TextPeliculaNombre3.setText("Duración promedio de las películas:");
+
+        LabelPromedio.setBackground(java.awt.Color.white);
+        LabelPromedio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelPromedio.setForeground(java.awt.Color.white);
+        LabelPromedio.setText("------------");
+
+        LabelMenorDuracion.setBackground(java.awt.Color.white);
+        LabelMenorDuracion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelMenorDuracion.setForeground(java.awt.Color.white);
+        LabelMenorDuracion.setText("------------");
+
+        TextPeliculaNombre4.setBackground(java.awt.Color.white);
+        TextPeliculaNombre4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TextPeliculaNombre4.setForeground(java.awt.Color.white);
+        TextPeliculaNombre4.setText("Película de menor duración:");
+
         javax.swing.GroupLayout jPanelConsulta5Layout = new javax.swing.GroupLayout(jPanelConsulta5);
         jPanelConsulta5.setLayout(jPanelConsulta5Layout);
         jPanelConsulta5Layout.setHorizontalGroup(
             jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsulta5Layout.createSequentialGroup()
+                .addGap(0, 42, Short.MAX_VALUE)
+                .addComponent(jLabelConsultarMensaje1)
+                .addGap(40, 40, 40))
+            .addGroup(jPanelConsulta5Layout.createSequentialGroup()
+                .addGroup(jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelConsulta5Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelConsulta5Layout.createSequentialGroup()
+                                .addComponent(TextPeliculaNombre1)
+                                .addGap(35, 35, 35)
+                                .addComponent(LabelCantidad))
+                            .addGroup(jPanelConsulta5Layout.createSequentialGroup()
+                                .addComponent(jLabelConsulta1_5)
+                                .addGap(34, 34, 34)
+                                .addComponent(TextConsulta5, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LabelConsultar5, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelConsulta5Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(TextPeliculaNombre3)
+                        .addGap(35, 35, 35)
+                        .addComponent(LabelPromedio))
+                    .addGroup(jPanelConsulta5Layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addGroup(jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanelConsulta5Layout.createSequentialGroup()
+                                .addComponent(TextPeliculaNombre4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LabelMenorDuracion))
+                            .addGroup(jPanelConsulta5Layout.createSequentialGroup()
+                                .addComponent(TextPeliculaNombre2)
+                                .addGap(35, 35, 35)
+                                .addComponent(LabelMayorDuracion)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelConsulta5Layout.setVerticalGroup(
             jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
+            .addGroup(jPanelConsulta5Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabelConsultarMensaje1)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelConsulta5Layout.createSequentialGroup()
+                        .addGroup(jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelConsulta1_5)
+                            .addComponent(TextConsulta5, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                        .addGap(1, 1, 1))
+                    .addGroup(jPanelConsulta5Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(LabelConsultar5)))
+                .addGap(114, 114, 114)
+                .addGroup(jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextPeliculaNombre1)
+                    .addComponent(LabelCantidad))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextPeliculaNombre2)
+                    .addComponent(LabelMayorDuracion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelMenorDuracion)
+                    .addComponent(TextPeliculaNombre4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextPeliculaNombre3)
+                    .addComponent(LabelPromedio))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelConsulta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
@@ -432,10 +605,10 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         jLabelConsulta1_13.setForeground(java.awt.Color.white);
         jLabelConsulta1_13.setText("Países:");
 
-        jListPaises.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jListPaises.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jScrollPane1.setViewportView(jListPaises);
 
-        jListActores.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jListActores.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jScrollPane2.setViewportView(jListActores);
 
         javax.swing.GroupLayout jPanelDatosLayout = new javax.swing.GroupLayout(jPanelDatos);
@@ -458,9 +631,11 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
                                 .addComponent(jLabelConsulta1_10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TextPeliculaDuracion))
-                            .addComponent(jLabelConsulta1_12)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(97, 97, 97)
+                            .addComponent(jLabelConsulta1_12)))
+                    .addGroup(jPanelDatosLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(44, 44, 44)
                 .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDatosLayout.createSequentialGroup()
                         .addComponent(jLabelConsulta1_7)
@@ -475,8 +650,8 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TextPeliculaFecha))
                     .addComponent(jLabelConsulta1_13)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(44, Short.MAX_VALUE))
             .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelDatosLayout.createSequentialGroup()
                     .addGap(20, 20, 20)
@@ -508,10 +683,10 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
                     .addComponent(jLabelConsulta1_12)
                     .addComponent(jLabelConsulta1_13))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(142, Short.MAX_VALUE))
             .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelDatosLayout.createSequentialGroup()
                     .addGap(35, 35, 35)
@@ -640,12 +815,27 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2){
             if (!ModeloPeliculas.isEmpty()){
+                this.CargarPelicula();
                 panel_anterior.setVisible(false);
                 jPanelDatos.setVisible(true);
                 Recursion++;
             }
         }
     }//GEN-LAST:event_jListPeliculasMouseClicked
+
+    private void LabelConsultar5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsultar5MouseClicked
+        // TODO add your handling code here:
+        Datos = Query.getAggregatesCompania(TextConsulta5.getText());
+        LabelCantidad.setText(""+Datos.get(0));
+        LabelPromedio.setText(""+Datos.get(3));
+        LabelMayorDuracion.setText(""+Datos.get(1));
+        LabelMenorDuracion.setText(""+Datos.get(2));
+    }//GEN-LAST:event_LabelConsultar5MouseClicked
+
+    private void LabelConsultar5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsultar5MouseEntered
+        // TODO add your handling code here:
+        LabelConsultar5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelConsultar5MouseEntered
 
     /**
      * @param args the command line arguments
@@ -684,20 +874,30 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Back;
+    private javax.swing.JLabel LabelCantidad;
     private javax.swing.JLabel LabelConsulta1;
     private javax.swing.JLabel LabelConsulta2;
     private javax.swing.JLabel LabelConsulta3;
     private javax.swing.JLabel LabelConsulta4;
     private javax.swing.JLabel LabelConsulta5;
     private javax.swing.JLabel LabelConsultar;
+    private javax.swing.JLabel LabelConsultar5;
+    private javax.swing.JLabel LabelMayorDuracion;
+    private javax.swing.JLabel LabelMenorDuracion;
+    private javax.swing.JLabel LabelPromedio;
     private javax.swing.JTextField TextConsulta1_4;
     private javax.swing.JTextField TextConsulta1_5;
+    private javax.swing.JTextField TextConsulta5;
     private javax.swing.JLabel TextPeliculaDirector;
     private javax.swing.JLabel TextPeliculaDuracion;
     private javax.swing.JLabel TextPeliculaFecha;
     private javax.swing.JLabel TextPeliculaFranquicia;
     private javax.swing.JLabel TextPeliculaGenero;
     private javax.swing.JLabel TextPeliculaNombre;
+    private javax.swing.JLabel TextPeliculaNombre1;
+    private javax.swing.JLabel TextPeliculaNombre2;
+    private javax.swing.JLabel TextPeliculaNombre3;
+    private javax.swing.JLabel TextPeliculaNombre4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabelConsulta1_10;
@@ -706,10 +906,12 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelConsulta1_13;
     private javax.swing.JLabel jLabelConsulta1_3;
     private javax.swing.JLabel jLabelConsulta1_4;
+    private javax.swing.JLabel jLabelConsulta1_5;
     private javax.swing.JLabel jLabelConsulta1_7;
     private javax.swing.JLabel jLabelConsulta1_8;
     private javax.swing.JLabel jLabelConsulta1_9;
     private javax.swing.JLabel jLabelConsultarMensaje;
+    private javax.swing.JLabel jLabelConsultarMensaje1;
     private javax.swing.JList<String> jListActores;
     private javax.swing.JList<String> jListPaises;
     private javax.swing.JList<String> jListPeliculas;

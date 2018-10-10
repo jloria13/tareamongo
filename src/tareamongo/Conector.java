@@ -68,6 +68,20 @@ public class Conector {
         return Peliculas;
     }
     
+    public String getPeliculaDuracion(Double duracion,String compania_productora){
+        ObjectId ObjectID;
+        String Nombre,Genero,Director,Compania_productora,Franquicia;
+        Double Fecha,Duracion;
+        ArrayList<String> Paises,Actores;
+        Pelicula movie;
+        ArrayList<Pelicula> Peliculas = new ArrayList<>();
+        
+        Document Documento = ColPelis.find(and(eq("duracion",duracion),
+                eq("compania_productora",compania_productora))).first();
+            Nombre = Documento.getString("nombre");
+        return Nombre;
+    }
+    
     public ArrayList<Pelicula> getPeliculas(){
         ObjectId ObjectID;
         String Nombre, Genero, Director, Compania_productora, Franquicia;
@@ -168,29 +182,35 @@ public class Conector {
     
     public ArrayList getAggregatesCompania (String Compania_productora){
         int Cantidad=0;
-        Double Min=0.0,Max=0.0;
+        String Mayor,Menor;
+        Double Min=0.0,Max=0.0,Avg=0.0;
         ArrayList Datos = new ArrayList();
         for (Document Documento : ColPelis.aggregate(Arrays.asList(
                 Aggregates.match(Filters.eq("compania_productora",Compania_productora)),
                 Aggregates.group(null, Accumulators.sum("cantidad", 1))))){
             Cantidad = Documento.getInteger("cantidad");
-            System.out.println("Cantidad: "+Cantidad);
         }
         Datos.add(Cantidad);
         for (Document Documento : ColPelis.aggregate(Arrays.asList(
                 Aggregates.match(Filters.eq("compania_productora", Compania_productora)),
                 Aggregates.group(null, Accumulators.max("max", "$duracion"))))) {
             Max = Documento.getDouble("max");
-            System.out.println("Max: "+Max);
         }
-        Datos.add(Max);
+        Mayor = this.getPeliculaDuracion(Max, Compania_productora);
+        Datos.add(Mayor);
         for (Document Documento : ColPelis.aggregate(Arrays.asList(
                 Aggregates.match(Filters.eq("compania_productora", Compania_productora)),
                 Aggregates.group(null, Accumulators.min("min", "$duracion"))))) {
             Min = Documento.getDouble("min");
-            System.out.println("Min: "+Min);
         }
-        Datos.add(Min);
+        Menor = this.getPeliculaDuracion(Min, Compania_productora);
+        Datos.add(Menor);
+        for (Document Documento : ColPelis.aggregate(Arrays.asList(
+                Aggregates.match(Filters.eq("compania_productora", Compania_productora)),
+                Aggregates.group(null, Accumulators.avg("avg", "$duracion"))))) {
+            Avg = Documento.getDouble("avg");
+        }
+        Datos.add(Avg);
         return Datos;
     }
     
@@ -266,7 +286,7 @@ public class Conector {
                 .append("fecha", Fecha)
                 .append("compania_productora", CompaniaProductora)
                 .append("actores", Actores)
-                .append("paises", PaisProdu));
+                .append("pais_produccion", PaisProdu));
     }
     
     public void insertCompaniaProductora (String Nombre,String Web,Double Fundacion){
