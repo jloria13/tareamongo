@@ -15,6 +15,7 @@ import javax.swing.DefaultListModel;
 public class ConsultasEspeciales extends javax.swing.JFrame {
 
     Seleccion ventana_anterior;
+    javax.swing.JPanel panel_anterior;
     int Consulta_seleccion,Recursion;
     DefaultListModel ModeloPaises,ModeloActores,ModeloPeliculas;
     
@@ -25,17 +26,19 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
     ConsultasEspeciales(Seleccion ventana) {
         this.ventana_anterior = ventana;
         Consulta_seleccion = 1;
+        Recursion = 1;
         ModeloPaises = new DefaultListModel();
         ModeloActores = new DefaultListModel();
         ModeloPeliculas = new DefaultListModel();
         initComponents();
+        panel_anterior = jPanelConsulta1_4;
         SeleccionConsulta();
     }
     
     void SeleccionConsulta(){
-        jPanelConsulta1_3.setVisible(true);
-        jPanelConsulta4.setVisible(false);
+        jPanelConsulta1_4.setVisible(true);
         jPanelConsulta5.setVisible(false);
+        panel_anterior = jPanelConsulta1_4;
         switch (Consulta_seleccion) {
             case 1:
                 jLabelConsultarMensaje.setText("Consultar película por nombre");
@@ -57,14 +60,15 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
                 jLabelConsulta1_4.setText("Fin:");
                 break;
             case 4:
-                jPanelConsulta1_3.setVisible(false);
-                jPanelConsulta4.setVisible(true);
-                jPanelConsulta5.setVisible(false);
+                jLabelConsultarMensaje.setText("Consultar película por compañía");
+                jLabelConsulta1_3.setText("Nombre:");
+                jLabelConsulta1_4.setVisible(false);
+                TextConsulta1_4.setVisible(false);
                 break;
             case 5:
-                jPanelConsulta1_3.setVisible(false);
-                jPanelConsulta4.setVisible(false);
+                jPanelConsulta1_4.setVisible(false);
                 jPanelConsulta5.setVisible(true);
+                panel_anterior = jPanelConsulta5;
                 break;
         }
     }
@@ -86,7 +90,7 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         LabelConsulta3 = new javax.swing.JLabel();
         LabelConsulta4 = new javax.swing.JLabel();
         LabelConsulta5 = new javax.swing.JLabel();
-        jPanelConsulta1_3 = new javax.swing.JPanel();
+        jPanelConsulta1_4 = new javax.swing.JPanel();
         jLabelConsultarMensaje = new javax.swing.JLabel();
         jLabelConsulta1_3 = new javax.swing.JLabel();
         TextConsulta1_3 = new javax.swing.JTextField();
@@ -95,7 +99,6 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         TextConsulta1_4 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jListPeliculas = new javax.swing.JList<String>(ModeloPeliculas);
-        jPanelConsulta4 = new javax.swing.JPanel();
         jPanelConsulta5 = new javax.swing.JPanel();
         jPanelDatos = new javax.swing.JPanel();
         TextPeliculaNombre = new javax.swing.JLabel();
@@ -241,7 +244,7 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 540));
 
-        jPanelConsulta1_3.setBackground(new java.awt.Color(0, 153, 153));
+        jPanelConsulta1_4.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabelConsultarMensaje.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabelConsultarMensaje.setForeground(new java.awt.Color(255, 255, 255));
@@ -271,75 +274,68 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         jLabelConsulta1_4.setBackground(java.awt.Color.white);
         jLabelConsulta1_4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelConsulta1_4.setForeground(java.awt.Color.white);
-        jLabelConsulta1_4.setText("Nombre:");
+        jLabelConsulta1_4.setText("Fin:");
 
         TextConsulta1_4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         jListPeliculas.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jListPeliculas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListPeliculasMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jListPeliculas);
 
-        javax.swing.GroupLayout jPanelConsulta1_3Layout = new javax.swing.GroupLayout(jPanelConsulta1_3);
-        jPanelConsulta1_3.setLayout(jPanelConsulta1_3Layout);
-        jPanelConsulta1_3Layout.setHorizontalGroup(
-            jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelConsulta1_4Layout = new javax.swing.GroupLayout(jPanelConsulta1_4);
+        jPanelConsulta1_4.setLayout(jPanelConsulta1_4Layout);
+        jPanelConsulta1_4Layout.setHorizontalGroup(
+            jPanelConsulta1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabelConsultarMensaje)
-                        .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
-                            .addComponent(jLabelConsulta1_3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(TextConsulta1_3, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(LabelConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
-                            .addComponent(jLabelConsulta1_4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(TextConsulta1_4, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanelConsulta1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelConsultarMensaje)
+                    .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
+                        .addComponent(jLabelConsulta1_3)
+                        .addGap(34, 34, 34)
+                        .addComponent(TextConsulta1_3, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LabelConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
+                        .addComponent(jLabelConsulta1_4)
+                        .addGroup(jPanelConsulta1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addComponent(TextConsulta1_4, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(126, Short.MAX_VALUE))
         );
-        jPanelConsulta1_3Layout.setVerticalGroup(
-            jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
+        jPanelConsulta1_4Layout.setVerticalGroup(
+            jPanelConsulta1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelConsultarMensaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
-                        .addGroup(jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelConsulta1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
+                        .addGroup(jPanelConsulta1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelConsulta1_3)
                             .addComponent(TextConsulta1_3, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanelConsulta1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelConsulta1_4)
                             .addComponent(TextConsulta1_4, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                        .addGap(43, 43, 43))
-                    .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
+                        .addGap(53, 53, 53))
+                    .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(LabelConsultar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addGap(64, 64, 64))
         );
 
-        getContentPane().add(jPanelConsulta1_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
-
-        jPanelConsulta4.setBackground(new java.awt.Color(0, 153, 153));
-
-        javax.swing.GroupLayout jPanelConsulta4Layout = new javax.swing.GroupLayout(jPanelConsulta4);
-        jPanelConsulta4.setLayout(jPanelConsulta4Layout);
-        jPanelConsulta4Layout.setHorizontalGroup(
-            jPanelConsulta4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
-        );
-        jPanelConsulta4Layout.setVerticalGroup(
-            jPanelConsulta4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanelConsulta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
+        getContentPane().add(jPanelConsulta1_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
 
         jPanelConsulta5.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -523,8 +519,17 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
 
     private void BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseClicked
         // TODO add your handling code here:
-        ventana_anterior.setVisible(true);
-        this.dispose();
+        switch(Recursion){
+            case 1:
+                ventana_anterior.setVisible(true);
+                this.dispose();
+                break;
+            case 2:
+                jPanelDatos.setVisible(false);
+                panel_anterior.setVisible(true);
+                Recursion--;
+                break;
+        }
     }//GEN-LAST:event_BackMouseClicked
 
     private void BackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseEntered
@@ -604,6 +609,17 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         LabelConsultar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_LabelConsultarMouseEntered
 
+    private void jListPeliculasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPeliculasMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2){
+            //Agarrar del ArrayList la pelicula;
+            //Cargar el panel con los datos correspondientes;
+            panel_anterior.setVisible(false);
+            jPanelDatos.setVisible(true);
+            Recursion++;
+        }
+    }//GEN-LAST:event_jListPeliculasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -671,8 +687,7 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
     private javax.swing.JList<String> jListPaises;
     private javax.swing.JList<String> jListPeliculas;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanelConsulta1_3;
-    private javax.swing.JPanel jPanelConsulta4;
+    private javax.swing.JPanel jPanelConsulta1_4;
     private javax.swing.JPanel jPanelConsulta5;
     private javax.swing.JPanel jPanelDatos;
     private javax.swing.JScrollPane jScrollPane1;
