@@ -5,7 +5,6 @@
  */
 package Interfaz;
 
-import com.sun.glass.events.KeyEvent;
 import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -14,6 +13,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import tareamongo.Conector;
 import tareamongo.Pelicula;
+import tareamongo.CompaniaProductora;
 
 /**
  *
@@ -25,6 +25,7 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
     Conector Query;
     boolean Crear;
     ArrayList<CompaniaProductora> Companias;
+    DefaultListModel ModeloCompanias;
     
     public CRUDCompaniaProductora() {
         initComponents();
@@ -32,26 +33,24 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
 
     public CRUDCompaniaProductora(Seleccion ventana) {
         ventana_anterior = ventana;
+        ModeloCompanias = new DefaultListModel();
         initComponents();
         Crear = false;
         jPanelCreate.setVisible(false);
         jPanelDelete.setVisible(false);
         Query = new Conector();
-        this.VerPelicula();
+        this.VerCompania();
     }
     
-    public void CrearPelicula(){
+    public void CrearCompania(){
         try {
-            String Duracion = TextDuracion.getText();
             String Fecha = TextFundacion.getText();
-            Query.insertPelicula(TextNombre.getText(), TextGenero.getText(),
-                    TextWeb.getText(), TextFranquicia.getText(),
-                    Paises,Double.parseDouble(Duracion), Double.parseDouble(Fecha),
-                    TextCompaniaProductora.getText(), Actores);
-            JOptionPane.showMessageDialog(this, "Pelicula registrada", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
+            Query.insertCompaniaProductora(TextNombre.getText(),
+                    TextWeb.getText(), Double.parseDouble(Fecha));
+            JOptionPane.showMessageDialog(this, "Compañía productora registrada", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
             this.BorrarView();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No se pudo registrar la película", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo registrar la compañía productora", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -64,60 +63,44 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         }
     }
     
-    public void VerPelicula(){
+    public void VerCompania(){
         try {
-            Peliculas = Query.getPeliculas();
-            for (Pelicula peli : Peliculas) {
-                ModeloPeliculas.addElement(peli.Nombre);
+            Companias = Query.getCompaniasProductoras();
+            for (CompaniaProductora compania : Companias) {
+                ModeloCompanias.addElement(compania.Nombre);
             }
         }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "No se pudo cargar las películas", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo cargar las compañías", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    public void setPelicula(Pelicula peli){
+    public void setCompania(CompaniaProductora compania){
         this.BorrarView();
-        TextNombre.setText(peli.Nombre);
-        TextWeb.setText(peli.Director);
-        TextFranquicia.setText(peli.Franquicia);
-        TextCompaniaProductora.setText(peli.Compania_productora);
-        TextGenero.setText(peli.Genero);
-        String duracion = ""+peli.Duracion;
-        TextDuracion.setText(duracion.replace(".0", ""));
-        String fecha = ""+peli.Fecha;
+        TextNombre.setText(compania.Nombre);
+        TextWeb.setText(compania.Web);
+        String fecha = ""+compania.Fundacion;
         TextFundacion.setText(fecha.replace(".0", ""));
-        Actores = peli.Actores;
-        for (String Actor:peli.Actores){
-            ModeloActores.addElement(Actor);
-        }
-        Paises = peli.Paises;
-        for (String Pais:peli.Paises){
-            ModeloPaises.addElement(Pais);
-        }
-        jLabelModficarMensaje.setVisible(false);
         jLabelCrearMensaje.setVisible(false);
         jPanelView.setVisible(false);
         jPanelCreate.setVisible(true);
     }
     
-    public void ActualizarPelicula(){
+    public void ActualizarCompania(){
         try {
-            String Duracion = TextDuracion.getText();
             String Fecha = TextFundacion.getText();
-            Query.setPelicula(TextNombre.getText(), TextGenero.getText(),
-                    TextWeb.getText(), TextFranquicia.getText(),
-                    Paises, Double.parseDouble(Duracion), Double.parseDouble(Fecha),
-                    TextCompaniaProductora.getText(), Actores);
-            JOptionPane.showMessageDialog(this, "Pelicula ha sido actualizada", "Actualizada", JOptionPane.INFORMATION_MESSAGE);
+            Query.setCompaniaProductora(TextNombre.getText(),
+                    TextWeb.getText(),Double.parseDouble(Fecha));
+            JOptionPane.showMessageDialog(this, "Compañía productora ha sido actualizada", "Actualizada", JOptionPane.INFORMATION_MESSAGE);
             this.BorrarView();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No se pudo actualizar la película", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo actualizar la compañía productora", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     public void BorrarView(){
+        ModeloCompanias.removeAllElements();
         TextNombre.setText("");
-        TextWeb.setText("");
+        TextWeb.setText("http://");
         TextFundacion.setText("");
     }
 
@@ -147,7 +130,7 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         jPanelView = new javax.swing.JPanel();
         jLabelCrearMensaje2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jListPeliculas = new javax.swing.JList<String>(ModeloPeliculas);
+        jListPeliculas = new javax.swing.JList<String>(ModeloCompanias);
         jPanelDelete = new javax.swing.JPanel();
         jLabelCrearMensaje1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -344,7 +327,7 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
 
         jLabelCrearMensaje2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabelCrearMensaje2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelCrearMensaje2.setText("Ver películas");
+        jLabelCrearMensaje2.setText("Ver Compañías Productoras");
 
         jListPeliculas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jListPeliculas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -467,12 +450,9 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         this.BorrarView();
         jPanelCreate.setVisible(true);
         jLabelCrearMensaje.setVisible(true);  //Mensaje Crear
-        jLabelModficarMensaje.setVisible(false);   //Mensaje Modificar
         jPanelDelete.setVisible(false);
         jPanelView.setVisible(false);
         Crear = true;
-        Paises = new ArrayList<>();
-        Actores = new ArrayList<>();
     }//GEN-LAST:event_LabelCrearMouseClicked
 
     private void LabelCrearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCrearMouseEntered
@@ -508,8 +488,8 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         if (evt.getClickCount() == 2){
             int valor = jListPeliculas.getSelectedIndex();
             try {
-                Pelicula peli = Peliculas.get(valor);
-                setPelicula(peli);
+                CompaniaProductora compania = Companias.get(valor);
+                setCompania(compania);
             } catch (Exception e) {
                 Logger.getLogger(CRUDCompaniaProductora.class.getName()).log(Level.INFO, "message"+e);
                 JOptionPane.showMessageDialog(this, "Se produjo un error", "Error", JOptionPane.ERROR_MESSAGE);
@@ -519,7 +499,7 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
 
     private void LabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelModificarMouseClicked
         // TODO add your handling code here:
-        this.VerPelicula();
+        this.VerCompania();
         jPanelCreate.setVisible(false);
         jLabelCrearMensaje.setVisible(false);  //Mensaje Crear
         jPanelView.setVisible(true);
@@ -540,9 +520,9 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
     private void LabelGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelGuardarMouseClicked
         // TODO add your handling code here:
         if (this.Crear){
-            CrearPelicula();
+            CrearCompania();
         }else{
-            ActualizarPelicula();
+            ActualizarCompania();
         }
     }//GEN-LAST:event_LabelGuardarMouseClicked
 

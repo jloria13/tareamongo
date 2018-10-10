@@ -7,8 +7,8 @@ package tareamongo;
 
 public class CompaniaProductora {
     
-    Double Fundacion;
-    String Nombre,Web;
+    public Double Fundacion;
+    public String Nombre,Web;
     
     public CompaniaProductora (Double Fundacion,String Nombre,String Web){
         this.Fundacion = Fundacion;
