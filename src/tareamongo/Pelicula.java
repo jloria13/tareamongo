@@ -10,10 +10,10 @@ import org.bson.types.ObjectId;
 
 public class Pelicula {
     
-    ObjectId ObjectID;
-    String Nombre, Genero, Director, Compania_productora, Franquicia;
-    Double Fecha, Duracion;
-    ArrayList<String> Paises, Actores;
+    public ObjectId ObjectID;
+    public String Nombre, Genero, Director, Compania_productora, Franquicia;
+    public Double Fecha, Duracion;
+    public ArrayList<String> Paises, Actores;
     
     public Pelicula (ObjectId ObjectID,String Nombre,String Genero,
             String Director,String Compania_productora,String Franquicia,

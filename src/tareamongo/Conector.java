@@ -63,7 +63,32 @@ public class Conector {
             Actores = Documento.get("actores", ArrayList.class);
             movie = new Pelicula(ObjectID,Nombre,Genero,Director,Compania_productora,
                     Franquicia,Fecha,Duracion,Paises,Actores);
-            movie.PrintAll();
+            Peliculas.add(movie);
+        }
+        return Peliculas;
+    }
+    
+    public ArrayList<Pelicula> getPeliculas(){
+        ObjectId ObjectID;
+        String Nombre, Genero, Director, Compania_productora, Franquicia;
+        Double Fecha, Duracion;
+        ArrayList<String> Paises, Actores;
+        Pelicula movie;
+        ArrayList<Pelicula> Peliculas = new ArrayList<>();
+
+        for (Document Documento : ColPelis.find(new Document())) {
+            ObjectID = Documento.getObjectId("_id");
+            Nombre = Documento.getString("nombre");
+            Genero = Documento.getString("genero");
+            Director = Documento.getString("director");
+            Franquicia = Documento.getString("franquicia");
+            Paises = Documento.get("pais_produccion", ArrayList.class);
+            Duracion = Documento.getDouble("duracion");
+            Fecha = Documento.getDouble("fecha");
+            Compania_productora = Documento.getString("compania_productora");
+            Actores = Documento.get("actores", ArrayList.class);
+            movie = new Pelicula(ObjectID, Nombre, Genero, Director, Compania_productora,
+                    Franquicia, Fecha, Duracion, Paises, Actores);
             Peliculas.add(movie);
         }
         return Peliculas;
@@ -92,7 +117,6 @@ public class Conector {
             Actores = Documento.get("actores", ArrayList.class);
             movie = new Pelicula(ObjectID, Nombre, Genero, Director, Compania_productora,
                     Franquicia, Fecha, Duracion, Paises, Actores);
-            movie.PrintAll();
             Peliculas.add(movie);
         }
         return Peliculas;
@@ -120,7 +144,6 @@ public class Conector {
             Actores = Documento.get("actores", ArrayList.class);
             movie = new Pelicula(ObjectID, Nombre, Genero, Director, Compania_productora,
                     Franquicia, Fecha, Duracion, Paises, Actores);
-            movie.PrintAll();
             Peliculas.add(movie);
         }
         return Peliculas;

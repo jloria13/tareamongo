@@ -35,6 +35,9 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         Back = new javax.swing.JLabel();
+        LabelCrear = new javax.swing.JLabel();
+        LabelModificar = new javax.swing.JLabel();
+        LabelEliminar = new javax.swing.JLabel();
         jPanelCreate = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,21 +55,79 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
             }
         });
 
+        LabelCrear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelCrear.setForeground(new java.awt.Color(0, 153, 153));
+        LabelCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelCrear.setText("CREAR");
+        LabelCrear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelCrearMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelCrearMouseEntered(evt);
+            }
+        });
+
+        LabelModificar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelModificar.setForeground(new java.awt.Color(0, 153, 153));
+        LabelModificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelModificar.setText("MODIFICAR");
+        LabelModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelModificarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelModificarMouseEntered(evt);
+            }
+        });
+
+        LabelEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelEliminar.setForeground(new java.awt.Color(0, 153, 153));
+        LabelEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelEliminar.setText("ELIMINAR");
+        LabelEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelEliminarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelEliminarMouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(Back)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(Back))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(LabelCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LabelModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(LabelEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Back)
-                .addContainerGap(465, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(LabelCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
+                .addComponent(LabelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(LabelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 540));
@@ -100,6 +161,33 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         // TODO add your handling code here:
         Back.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_BackMouseEntered
+
+    private void LabelCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCrearMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LabelCrearMouseClicked
+
+    private void LabelCrearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCrearMouseEntered
+        // TODO add your handling code here:
+        LabelCrear.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelCrearMouseEntered
+
+    private void LabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelModificarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LabelModificarMouseClicked
+
+    private void LabelModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelModificarMouseEntered
+        // TODO add your handling code here:
+        LabelModificar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelModificarMouseEntered
+
+    private void LabelEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelEliminarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LabelEliminarMouseClicked
+
+    private void LabelEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelEliminarMouseEntered
+        // TODO add your handling code here:
+        LabelEliminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelEliminarMouseEntered
 
     /**
      * @param args the command line arguments
@@ -138,6 +226,9 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Back;
+    private javax.swing.JLabel LabelCrear;
+    private javax.swing.JLabel LabelEliminar;
+    private javax.swing.JLabel LabelModificar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCreate;
     // End of variables declaration//GEN-END:variables
