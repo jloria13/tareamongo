@@ -6,7 +6,11 @@
 package Interfaz;
 
 import java.awt.Cursor;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import tareamongo.Conector;
+import tareamongo.Pelicula;
 
 /**
  *
@@ -15,9 +19,12 @@ import javax.swing.DefaultListModel;
 public class ConsultasEspeciales extends javax.swing.JFrame {
 
     Seleccion ventana_anterior;
+    Conector Query;
     javax.swing.JPanel panel_anterior;
     int Consulta_seleccion,Recursion;
     DefaultListModel ModeloPaises,ModeloActores,ModeloPeliculas;
+    ArrayList<Pelicula> Peliculas;
+    ArrayList<String> Actores,Paises;
     
     public ConsultasEspeciales() {
         initComponents();
@@ -30,6 +37,7 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         ModeloPaises = new DefaultListModel();
         ModeloActores = new DefaultListModel();
         ModeloPeliculas = new DefaultListModel();
+        Query = new Conector();
         initComponents();
         panel_anterior = jPanelConsulta1_4;
         SeleccionConsulta();
@@ -44,26 +52,26 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
                 jLabelConsultarMensaje.setText("Consultar película por nombre");
                 jLabelConsulta1_3.setText("Nombre:");
                 jLabelConsulta1_4.setVisible(false);
-                TextConsulta1_4.setVisible(false);
+                TextConsulta1_5.setVisible(false);
                 break;
             case 2:
                 jLabelConsultarMensaje.setText("Consultar película por franquicia");
                 jLabelConsulta1_3.setText("Franquicia:");
                 jLabelConsulta1_4.setVisible(false);
-                TextConsulta1_4.setVisible(false);
+                TextConsulta1_5.setVisible(false);
                 break;
             case 3:
                 jLabelConsultarMensaje.setText("Consultar película por rango de años");
                 jLabelConsulta1_3.setText("Inicio:");
                 jLabelConsulta1_4.setVisible(true);
-                TextConsulta1_4.setVisible(true);
+                TextConsulta1_5.setVisible(true);
                 jLabelConsulta1_4.setText("Fin:");
                 break;
             case 4:
                 jLabelConsultarMensaje.setText("Consultar película por compañía");
                 jLabelConsulta1_3.setText("Nombre:");
                 jLabelConsulta1_4.setVisible(false);
-                TextConsulta1_4.setVisible(false);
+                TextConsulta1_5.setVisible(false);
                 break;
             case 5:
                 jPanelConsulta1_4.setVisible(false);
@@ -93,10 +101,10 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         jPanelConsulta1_4 = new javax.swing.JPanel();
         jLabelConsultarMensaje = new javax.swing.JLabel();
         jLabelConsulta1_3 = new javax.swing.JLabel();
-        TextConsulta1_3 = new javax.swing.JTextField();
+        TextConsulta1_4 = new javax.swing.JTextField();
         LabelConsultar = new javax.swing.JLabel();
         jLabelConsulta1_4 = new javax.swing.JLabel();
-        TextConsulta1_4 = new javax.swing.JTextField();
+        TextConsulta1_5 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jListPeliculas = new javax.swing.JList<String>(ModeloPeliculas);
         jPanelConsulta5 = new javax.swing.JPanel();
@@ -255,7 +263,7 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         jLabelConsulta1_3.setForeground(java.awt.Color.white);
         jLabelConsulta1_3.setText("Nombre:");
 
-        TextConsulta1_3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        TextConsulta1_4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         LabelConsultar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         LabelConsultar.setForeground(java.awt.Color.white);
@@ -276,7 +284,7 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         jLabelConsulta1_4.setForeground(java.awt.Color.white);
         jLabelConsulta1_4.setText("Fin:");
 
-        TextConsulta1_4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        TextConsulta1_5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         jListPeliculas.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jListPeliculas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -297,7 +305,7 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
                     .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
                         .addComponent(jLabelConsulta1_3)
                         .addGap(34, 34, 34)
-                        .addComponent(TextConsulta1_3, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TextConsulta1_4, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(LabelConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
@@ -308,7 +316,7 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
                                 .addGap(78, 78, 78)
-                                .addComponent(TextConsulta1_4, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(TextConsulta1_5, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(126, Short.MAX_VALUE))
         );
         jPanelConsulta1_4Layout.setVerticalGroup(
@@ -321,11 +329,11 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
                     .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
                         .addGroup(jPanelConsulta1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelConsulta1_3)
-                            .addComponent(TextConsulta1_3, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                            .addComponent(TextConsulta1_4, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelConsulta1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelConsulta1_4)
-                            .addComponent(TextConsulta1_4, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                            .addComponent(TextConsulta1_5, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                         .addGap(53, 53, 53))
                     .addGroup(jPanelConsulta1_4Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -594,13 +602,32 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
 
     private void LabelConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsultarMouseClicked
         // TODO add your handling code here:
+        String ConsultaText = TextConsulta1_4.getText();
+        String ConsultaText2 = TextConsulta1_5.getText();
+        
         switch (Consulta_seleccion){
             case 1:
+                Peliculas = Query.getPeliculaNombre(ConsultaText);
                 break;
             case 2:
+                Peliculas = Query.getPeliculaFranquicia(ConsultaText);
                 break;
             case 3:
+                Peliculas = Query.getPeliculaRango(Double.parseDouble(ConsultaText), 
+                        Double.parseDouble(ConsultaText2));
                 break;
+            case 4:
+                Peliculas = Query.getPeliculaCompania(ConsultaText);
+                break;
+        }
+        
+        if (!Peliculas.isEmpty()){
+            ModeloPeliculas.removeAllElements();
+            for (Pelicula peli:Peliculas){
+                ModeloPeliculas.addElement(peli.Nombre);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudieron encontrar películas", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_LabelConsultarMouseClicked
 
@@ -612,11 +639,11 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
     private void jListPeliculasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPeliculasMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2){
-            //Agarrar del ArrayList la pelicula;
-            //Cargar el panel con los datos correspondientes;
-            panel_anterior.setVisible(false);
-            jPanelDatos.setVisible(true);
-            Recursion++;
+            if (!ModeloPeliculas.isEmpty()){
+                panel_anterior.setVisible(false);
+                jPanelDatos.setVisible(true);
+                Recursion++;
+            }
         }
     }//GEN-LAST:event_jListPeliculasMouseClicked
 
@@ -663,8 +690,8 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
     private javax.swing.JLabel LabelConsulta4;
     private javax.swing.JLabel LabelConsulta5;
     private javax.swing.JLabel LabelConsultar;
-    private javax.swing.JTextField TextConsulta1_3;
     private javax.swing.JTextField TextConsulta1_4;
+    private javax.swing.JTextField TextConsulta1_5;
     private javax.swing.JLabel TextPeliculaDirector;
     private javax.swing.JLabel TextPeliculaDuracion;
     private javax.swing.JLabel TextPeliculaFecha;
