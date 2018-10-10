@@ -6,6 +6,7 @@
 package Interfaz;
 
 import java.awt.Cursor;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -14,6 +15,8 @@ import java.awt.Cursor;
 public class ConsultasEspeciales extends javax.swing.JFrame {
 
     Seleccion ventana_anterior;
+    int Consulta_seleccion,Recursion;
+    DefaultListModel ModeloPaises,ModeloActores,ModeloPeliculas;
     
     public ConsultasEspeciales() {
         initComponents();
@@ -21,7 +24,49 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
 
     ConsultasEspeciales(Seleccion ventana) {
         this.ventana_anterior = ventana;
+        Consulta_seleccion = 1;
+        ModeloPaises = new DefaultListModel();
+        ModeloActores = new DefaultListModel();
+        ModeloPeliculas = new DefaultListModel();
         initComponents();
+        SeleccionConsulta();
+    }
+    
+    void SeleccionConsulta(){
+        jPanelConsulta1_3.setVisible(true);
+        jPanelConsulta4.setVisible(false);
+        jPanelConsulta5.setVisible(false);
+        switch (Consulta_seleccion) {
+            case 1:
+                jLabelConsultarMensaje.setText("Consultar película por nombre");
+                jLabelConsulta1_3.setText("Nombre:");
+                jLabelConsulta1_4.setVisible(false);
+                TextConsulta1_4.setVisible(false);
+                break;
+            case 2:
+                jLabelConsultarMensaje.setText("Consultar película por franquicia");
+                jLabelConsulta1_3.setText("Franquicia:");
+                jLabelConsulta1_4.setVisible(false);
+                TextConsulta1_4.setVisible(false);
+                break;
+            case 3:
+                jLabelConsultarMensaje.setText("Consultar película por rango de años");
+                jLabelConsulta1_3.setText("Inicio:");
+                jLabelConsulta1_4.setVisible(true);
+                TextConsulta1_4.setVisible(true);
+                jLabelConsulta1_4.setText("Fin:");
+                break;
+            case 4:
+                jPanelConsulta1_3.setVisible(false);
+                jPanelConsulta4.setVisible(true);
+                jPanelConsulta5.setVisible(false);
+                break;
+            case 5:
+                jPanelConsulta1_3.setVisible(false);
+                jPanelConsulta4.setVisible(false);
+                jPanelConsulta5.setVisible(true);
+                break;
+        }
     }
 
     /**
@@ -33,9 +78,49 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         Back = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        LabelConsulta1 = new javax.swing.JLabel();
+        LabelConsulta2 = new javax.swing.JLabel();
+        LabelConsulta3 = new javax.swing.JLabel();
+        LabelConsulta4 = new javax.swing.JLabel();
+        LabelConsulta5 = new javax.swing.JLabel();
+        jPanelConsulta1_3 = new javax.swing.JPanel();
+        jLabelConsultarMensaje = new javax.swing.JLabel();
+        jLabelConsulta1_3 = new javax.swing.JLabel();
+        TextConsulta1_3 = new javax.swing.JTextField();
+        LabelConsultar = new javax.swing.JLabel();
+        jLabelConsulta1_4 = new javax.swing.JLabel();
+        TextConsulta1_4 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jListPeliculas = new javax.swing.JList<String>(ModeloPeliculas);
+        jPanelConsulta4 = new javax.swing.JPanel();
+        jPanelConsulta5 = new javax.swing.JPanel();
+        jPanelDatos = new javax.swing.JPanel();
+        TextPeliculaNombre = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabelConsulta1_7 = new javax.swing.JLabel();
+        TextPeliculaDirector = new javax.swing.JLabel();
+        jLabelConsulta1_8 = new javax.swing.JLabel();
+        jLabelConsulta1_9 = new javax.swing.JLabel();
+        jLabelConsulta1_10 = new javax.swing.JLabel();
+        jLabelConsulta1_11 = new javax.swing.JLabel();
+        TextPeliculaGenero = new javax.swing.JLabel();
+        TextPeliculaFranquicia = new javax.swing.JLabel();
+        TextPeliculaDuracion = new javax.swing.JLabel();
+        TextPeliculaFecha = new javax.swing.JLabel();
+        jLabelConsulta1_12 = new javax.swing.JLabel();
+        jLabelConsulta1_13 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListPaises = new javax.swing.JList<String>(ModeloPaises);
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListActores = new javax.swing.JList<String>(ModeloActores);
+
+        jLabel2.setBackground(java.awt.Color.white);
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(java.awt.Color.white);
+        jLabel2.setText("Nombre:");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -52,39 +137,385 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
             }
         });
 
+        LabelConsulta1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelConsulta1.setForeground(new java.awt.Color(0, 153, 153));
+        LabelConsulta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelConsulta1.setText("C1");
+        LabelConsulta1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelConsulta1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelConsulta1MouseEntered(evt);
+            }
+        });
+
+        LabelConsulta2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelConsulta2.setForeground(new java.awt.Color(0, 153, 153));
+        LabelConsulta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelConsulta2.setText("C2");
+        LabelConsulta2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelConsulta2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelConsulta2MouseEntered(evt);
+            }
+        });
+
+        LabelConsulta3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelConsulta3.setForeground(new java.awt.Color(0, 153, 153));
+        LabelConsulta3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelConsulta3.setText("C3");
+        LabelConsulta3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelConsulta3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelConsulta3MouseEntered(evt);
+            }
+        });
+
+        LabelConsulta4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelConsulta4.setForeground(new java.awt.Color(0, 153, 153));
+        LabelConsulta4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelConsulta4.setText("C4");
+        LabelConsulta4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelConsulta4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelConsulta4MouseEntered(evt);
+            }
+        });
+
+        LabelConsulta5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelConsulta5.setForeground(new java.awt.Color(0, 153, 153));
+        LabelConsulta5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelConsulta5.setText("C5");
+        LabelConsulta5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelConsulta5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelConsulta5MouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(Back)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(Back))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LabelConsulta1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelConsulta2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelConsulta3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelConsulta4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelConsulta5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Back)
-                .addContainerGap(465, Short.MAX_VALUE))
+                .addGap(72, 72, 72)
+                .addComponent(LabelConsulta1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LabelConsulta2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LabelConsulta3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LabelConsulta4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LabelConsulta5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 540));
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanelConsulta1_3.setBackground(new java.awt.Color(0, 153, 153));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jLabelConsultarMensaje.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabelConsultarMensaje.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelConsultarMensaje.setText("Consultar película por nombre");
+
+        jLabelConsulta1_3.setBackground(java.awt.Color.white);
+        jLabelConsulta1_3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelConsulta1_3.setForeground(java.awt.Color.white);
+        jLabelConsulta1_3.setText("Nombre:");
+
+        TextConsulta1_3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        LabelConsultar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LabelConsultar.setForeground(java.awt.Color.white);
+        LabelConsultar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelConsultar.setText("CONSULTAR");
+        LabelConsultar.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.white, 2));
+        LabelConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelConsultarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelConsultarMouseEntered(evt);
+            }
+        });
+
+        jLabelConsulta1_4.setBackground(java.awt.Color.white);
+        jLabelConsulta1_4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelConsulta1_4.setForeground(java.awt.Color.white);
+        jLabelConsulta1_4.setText("Nombre:");
+
+        TextConsulta1_4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        jListPeliculas.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jScrollPane3.setViewportView(jListPeliculas);
+
+        javax.swing.GroupLayout jPanelConsulta1_3Layout = new javax.swing.GroupLayout(jPanelConsulta1_3);
+        jPanelConsulta1_3.setLayout(jPanelConsulta1_3Layout);
+        jPanelConsulta1_3Layout.setHorizontalGroup(
+            jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabelConsultarMensaje)
+                        .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
+                            .addComponent(jLabelConsulta1_3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(TextConsulta1_3, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(LabelConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
+                            .addComponent(jLabelConsulta1_4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(TextConsulta1_4, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(126, Short.MAX_VALUE))
+        );
+        jPanelConsulta1_3Layout.setVerticalGroup(
+            jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelConsultarMensaje)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
+                        .addGroup(jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelConsulta1_3)
+                            .addComponent(TextConsulta1_3, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelConsulta1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelConsulta1_4)
+                            .addComponent(TextConsulta1_4, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                        .addGap(43, 43, 43))
+                    .addGroup(jPanelConsulta1_3Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(LabelConsultar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
+        );
+
+        getContentPane().add(jPanelConsulta1_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
+
+        jPanelConsulta4.setBackground(new java.awt.Color(0, 153, 153));
+
+        javax.swing.GroupLayout jPanelConsulta4Layout = new javax.swing.GroupLayout(jPanelConsulta4);
+        jPanelConsulta4.setLayout(jPanelConsulta4Layout);
+        jPanelConsulta4Layout.setHorizontalGroup(
+            jPanelConsulta4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 680, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelConsulta4Layout.setVerticalGroup(
+            jPanelConsulta4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 540, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
+        getContentPane().add(jPanelConsulta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
+
+        jPanelConsulta5.setBackground(new java.awt.Color(0, 153, 153));
+
+        javax.swing.GroupLayout jPanelConsulta5Layout = new javax.swing.GroupLayout(jPanelConsulta5);
+        jPanelConsulta5.setLayout(jPanelConsulta5Layout);
+        jPanelConsulta5Layout.setHorizontalGroup(
+            jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 680, Short.MAX_VALUE)
+        );
+        jPanelConsulta5Layout.setVerticalGroup(
+            jPanelConsulta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 540, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanelConsulta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
+
+        jPanelDatos.setBackground(new java.awt.Color(0, 153, 153));
+
+        TextPeliculaNombre.setBackground(java.awt.Color.white);
+        TextPeliculaNombre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TextPeliculaNombre.setForeground(java.awt.Color.white);
+        TextPeliculaNombre.setText("Nombre:");
+
+        jLabel20.setBackground(java.awt.Color.white);
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel20.setForeground(java.awt.Color.white);
+        jLabel20.setText("Nombre:");
+
+        jLabelConsulta1_7.setBackground(java.awt.Color.white);
+        jLabelConsulta1_7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelConsulta1_7.setForeground(java.awt.Color.white);
+        jLabelConsulta1_7.setText("Director:");
+
+        TextPeliculaDirector.setBackground(java.awt.Color.white);
+        TextPeliculaDirector.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TextPeliculaDirector.setForeground(java.awt.Color.white);
+        TextPeliculaDirector.setText("Nombre:");
+
+        jLabelConsulta1_8.setBackground(java.awt.Color.white);
+        jLabelConsulta1_8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelConsulta1_8.setForeground(java.awt.Color.white);
+        jLabelConsulta1_8.setText("Género:");
+
+        jLabelConsulta1_9.setBackground(java.awt.Color.white);
+        jLabelConsulta1_9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelConsulta1_9.setForeground(java.awt.Color.white);
+        jLabelConsulta1_9.setText("Franquicia:");
+
+        jLabelConsulta1_10.setBackground(java.awt.Color.white);
+        jLabelConsulta1_10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelConsulta1_10.setForeground(java.awt.Color.white);
+        jLabelConsulta1_10.setText("Duración:");
+
+        jLabelConsulta1_11.setBackground(java.awt.Color.white);
+        jLabelConsulta1_11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelConsulta1_11.setForeground(java.awt.Color.white);
+        jLabelConsulta1_11.setText("Fecha:");
+
+        TextPeliculaGenero.setBackground(java.awt.Color.white);
+        TextPeliculaGenero.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TextPeliculaGenero.setForeground(java.awt.Color.white);
+        TextPeliculaGenero.setText("Nombre:");
+
+        TextPeliculaFranquicia.setBackground(java.awt.Color.white);
+        TextPeliculaFranquicia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TextPeliculaFranquicia.setForeground(java.awt.Color.white);
+        TextPeliculaFranquicia.setText("Nombre:");
+
+        TextPeliculaDuracion.setBackground(java.awt.Color.white);
+        TextPeliculaDuracion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TextPeliculaDuracion.setForeground(java.awt.Color.white);
+        TextPeliculaDuracion.setText("Nombre:");
+
+        TextPeliculaFecha.setBackground(java.awt.Color.white);
+        TextPeliculaFecha.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TextPeliculaFecha.setForeground(java.awt.Color.white);
+        TextPeliculaFecha.setText("Nombre:");
+
+        jLabelConsulta1_12.setBackground(java.awt.Color.white);
+        jLabelConsulta1_12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelConsulta1_12.setForeground(java.awt.Color.white);
+        jLabelConsulta1_12.setText("Actores:");
+
+        jLabelConsulta1_13.setBackground(java.awt.Color.white);
+        jLabelConsulta1_13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelConsulta1_13.setForeground(java.awt.Color.white);
+        jLabelConsulta1_13.setText("Países:");
+
+        jListPaises.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jScrollPane1.setViewportView(jListPaises);
+
+        jListActores.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jScrollPane2.setViewportView(jListActores);
+
+        javax.swing.GroupLayout jPanelDatosLayout = new javax.swing.GroupLayout(jPanelDatos);
+        jPanelDatos.setLayout(jPanelDatosLayout);
+        jPanelDatosLayout.setHorizontalGroup(
+            jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelDatosLayout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(TextPeliculaNombre))
+                    .addGroup(jPanelDatosLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                .addComponent(jLabelConsulta1_8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextPeliculaGenero))
+                            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                .addComponent(jLabelConsulta1_10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextPeliculaDuracion))
+                            .addComponent(jLabelConsulta1_12)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(97, 97, 97)
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelDatosLayout.createSequentialGroup()
+                        .addComponent(jLabelConsulta1_7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TextPeliculaDirector))
+                    .addGroup(jPanelDatosLayout.createSequentialGroup()
+                        .addComponent(jLabelConsulta1_9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextPeliculaFranquicia))
+                    .addGroup(jPanelDatosLayout.createSequentialGroup()
+                        .addComponent(jLabelConsulta1_11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextPeliculaFecha))
+                    .addComponent(jLabelConsulta1_13)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelDatosLayout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(jLabel20)
+                    .addContainerGap(586, Short.MAX_VALUE)))
+        );
+        jPanelDatosLayout.setVerticalGroup(
+            jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TextPeliculaNombre)
+                    .addComponent(jLabelConsulta1_7)
+                    .addComponent(TextPeliculaDirector))
+                .addGap(37, 37, 37)
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelConsulta1_8)
+                    .addComponent(TextPeliculaGenero)
+                    .addComponent(jLabelConsulta1_9)
+                    .addComponent(TextPeliculaFranquicia))
+                .addGap(35, 35, 35)
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelConsulta1_10)
+                    .addComponent(TextPeliculaDuracion)
+                    .addComponent(jLabelConsulta1_11)
+                    .addComponent(TextPeliculaFecha))
+                .addGap(41, 41, 41)
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelConsulta1_12)
+                    .addComponent(jLabelConsulta1_13))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(181, Short.MAX_VALUE))
+            .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelDatosLayout.createSequentialGroup()
+                    .addGap(35, 35, 35)
+                    .addComponent(jLabel20)
+                    .addContainerGap(480, Short.MAX_VALUE)))
+        );
+
+        getContentPane().add(jPanelDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
 
         pack();
         setLocationRelativeTo(null);
@@ -100,6 +531,78 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
         // TODO add your handling code here:
         Back.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_BackMouseEntered
+
+    private void LabelConsulta1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsulta1MouseClicked
+        // TODO add your handling code here:
+        Consulta_seleccion = 1;
+        this.SeleccionConsulta();
+    }//GEN-LAST:event_LabelConsulta1MouseClicked
+
+    private void LabelConsulta1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsulta1MouseEntered
+        // TODO add your handling code here:
+        LabelConsulta1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelConsulta1MouseEntered
+
+    private void LabelConsulta2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsulta2MouseClicked
+        // TODO add your handling code here:
+        Consulta_seleccion = 2;
+        this.SeleccionConsulta();
+    }//GEN-LAST:event_LabelConsulta2MouseClicked
+
+    private void LabelConsulta2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsulta2MouseEntered
+        // TODO add your handling code here:
+        LabelConsulta2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelConsulta2MouseEntered
+
+    private void LabelConsulta3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsulta3MouseClicked
+        // TODO add your handling code here:
+        Consulta_seleccion = 3;
+        this.SeleccionConsulta();
+    }//GEN-LAST:event_LabelConsulta3MouseClicked
+
+    private void LabelConsulta3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsulta3MouseEntered
+        // TODO add your handling code here:
+        LabelConsulta3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelConsulta3MouseEntered
+
+    private void LabelConsulta4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsulta4MouseClicked
+        // TODO add your handling code here:
+        Consulta_seleccion = 4;
+        this.SeleccionConsulta();
+    }//GEN-LAST:event_LabelConsulta4MouseClicked
+
+    private void LabelConsulta4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsulta4MouseEntered
+        // TODO add your handling code here:
+        LabelConsulta4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelConsulta4MouseEntered
+
+    private void LabelConsulta5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsulta5MouseClicked
+        // TODO add your handling code here:
+        Consulta_seleccion = 5;
+        this.SeleccionConsulta();
+    }//GEN-LAST:event_LabelConsulta5MouseClicked
+
+    private void LabelConsulta5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsulta5MouseEntered
+        // TODO add your handling code here:
+        LabelConsulta5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelConsulta5MouseEntered
+
+    private void LabelConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsultarMouseClicked
+        // TODO add your handling code here:
+        switch (Consulta_seleccion){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+    }//GEN-LAST:event_LabelConsultarMouseClicked
+
+    private void LabelConsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelConsultarMouseEntered
+        // TODO add your handling code here:
+        LabelConsultar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LabelConsultarMouseEntered
 
     /**
      * @param args the command line arguments
@@ -138,7 +641,42 @@ public class ConsultasEspeciales extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Back;
+    private javax.swing.JLabel LabelConsulta1;
+    private javax.swing.JLabel LabelConsulta2;
+    private javax.swing.JLabel LabelConsulta3;
+    private javax.swing.JLabel LabelConsulta4;
+    private javax.swing.JLabel LabelConsulta5;
+    private javax.swing.JLabel LabelConsultar;
+    private javax.swing.JTextField TextConsulta1_3;
+    private javax.swing.JTextField TextConsulta1_4;
+    private javax.swing.JLabel TextPeliculaDirector;
+    private javax.swing.JLabel TextPeliculaDuracion;
+    private javax.swing.JLabel TextPeliculaFecha;
+    private javax.swing.JLabel TextPeliculaFranquicia;
+    private javax.swing.JLabel TextPeliculaGenero;
+    private javax.swing.JLabel TextPeliculaNombre;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabelConsulta1_10;
+    private javax.swing.JLabel jLabelConsulta1_11;
+    private javax.swing.JLabel jLabelConsulta1_12;
+    private javax.swing.JLabel jLabelConsulta1_13;
+    private javax.swing.JLabel jLabelConsulta1_3;
+    private javax.swing.JLabel jLabelConsulta1_4;
+    private javax.swing.JLabel jLabelConsulta1_7;
+    private javax.swing.JLabel jLabelConsulta1_8;
+    private javax.swing.JLabel jLabelConsulta1_9;
+    private javax.swing.JLabel jLabelConsultarMensaje;
+    private javax.swing.JList<String> jListActores;
+    private javax.swing.JList<String> jListPaises;
+    private javax.swing.JList<String> jListPeliculas;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelConsulta1_3;
+    private javax.swing.JPanel jPanelConsulta4;
+    private javax.swing.JPanel jPanelConsulta5;
+    private javax.swing.JPanel jPanelDatos;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }
