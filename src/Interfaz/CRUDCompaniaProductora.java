@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import java.awt.Cursor;
+
 /**
  *
  * @author jlori
@@ -32,6 +34,7 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        Back = new javax.swing.JLabel();
         jPanelCreate = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,15 +42,31 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
 
         jPanel1.setBackground(java.awt.Color.white);
 
+        Back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imágenes/return.png"))); // NOI18N
+        Back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BackMouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(Back)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Back)
+                .addContainerGap(465, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 540));
@@ -68,7 +87,19 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
         getContentPane().add(jPanelCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 680, 540));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseClicked
+        // TODO add your handling code here:
+        ventana_anterior.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BackMouseClicked
+
+    private void BackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseEntered
+        // TODO add your handling code here:
+        Back.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_BackMouseEntered
 
     /**
      * @param args the command line arguments
@@ -106,6 +137,7 @@ public class CRUDCompaniaProductora extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Back;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCreate;
     // End of variables declaration//GEN-END:variables

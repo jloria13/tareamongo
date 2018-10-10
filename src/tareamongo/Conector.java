@@ -196,6 +196,7 @@ public class Conector {
                         .append("director", Director)
                         .append("franquicia",Franquicia)
                         .append("duracion", Duracion)
+                        .append("compania_productora", CompaniaProductora)
                         .append("fecha", Fecha)
                         .append("paises", PaisProdu)
                         .append("actores", Actores))); 
@@ -213,5 +214,24 @@ public class Conector {
     
     public void deleteCompaniaProductora (String Nombre){
         ColComps.deleteOne(eq("nombre",Nombre));
+    }
+    
+    public void insertPelicula(String Nombre,String Genero,String Director,String Franquicia,
+            ArrayList<String> PaisProdu,Double Duracion,Double Fecha,
+            String CompaniaProductora,ArrayList<String> Actores){
+        ColPelis.insertOne(new Document("nombre",Nombre)
+                .append("genero", Genero)
+                .append("director", Director)
+                .append("franquicia", Franquicia)
+                .append("duracion", Duracion)
+                .append("fecha", Fecha)
+                .append("compania_productora", CompaniaProductora)
+                .append("actores", Actores)
+                .append("paises", PaisProdu));
+    }
+    
+    public void insertCompaniaProductora (String Nombre,String Web,Double Fundacion){
+        ColComps.insertOne(new Document("nombre",Nombre)
+                .append("web", Web).append("fundacion", Fundacion));
     }
 }
